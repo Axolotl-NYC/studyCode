@@ -1,8 +1,10 @@
 const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
+
 const app = express();
 const PORT = 3000;
+const unitControllers = require('./controllers/unitControllers.js');
 
 app.use((req, res, next) => {
   console.log(`******* FLOW TEST *******
@@ -13,13 +15,15 @@ app.use((req, res, next) => {
   return next();
 });
 
-app.use(bodyParser())
+app.use(bodyParser());
 
+app.get('/units', unitControllers.getUnits, (req, res) => {
+  res.status(200).json(res.locals.units);
+});
 // sends a GET request to retreive the bundle.js
 app.use('/build', (req, res) => res.sendFile((path.resolve(__dirname, '../build/bundle.js'))));
 
 app.use('/', (req, res) => res.sendFile(path.resolve(__dirname, '../client/index.html')));
-
 
 
 // catch-all route handler for any requests to an unknown route
