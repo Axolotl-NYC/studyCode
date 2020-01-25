@@ -11,6 +11,10 @@ body {
   padding-top:10px;
 }
 
+h1 {
+  text-align: center;
+}
+
 .outerBox {
   max-width: 800px;
   margin: 0 auto;
@@ -25,14 +29,5 @@ body {
   margin: 15px auto;
   box-shadow: 5px 5px 15px rgba(0, 0, 0, .2);
 }
-
-
-
-#header {
-  text-align: center;
-  letter-spacing: .2em;
-  margin-bottom: 10px;
-}
-
 
 
