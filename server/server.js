@@ -32,13 +32,13 @@ app.post('/signup', unitControllers.createUser, /*cookieController.setSSIDCookie
 
 });
 
-app.post('/login', unitControllers.verifyUser, /*cookieController.setSSIDCookie,
- sessionController.startSession,*/ (req, res) => {
-   console.log("inside login post anonymous")
-  // what should happen here on successful sign up?
-  return res.status(200).json("log in success!!!");
+// app.post('/login', unitControllers.verifyUser, /*cookieController.setSSIDCookie,
+//  sessionController.startSession,*/ (req, res) => {
+//    console.log("inside login post anonymous")
+//   // what should happen here on successful sign up?
+//   return res.status(200).json("log in success!!!");
 
-});
+// });
 
 // *********************************************
 
