@@ -1,4 +1,5 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
+import MainContainer from './containers/MainContainer.jsx';
 
 
 class App extends Component {
@@ -6,7 +7,9 @@ class App extends Component {
   render() {
 
     return (
-      <h1>hello world</h1>
+      <div>
+        <MainContainer />
+      </div>
     )
 
   }
