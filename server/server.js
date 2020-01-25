@@ -3,6 +3,9 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
 const PORT = 3000;
+const userController = require('./userController.js');
+
+app.use(bodyParser())
 
 app.use((req, res, next) => {
   console.log(`******* FLOW TEST *******
@@ -13,12 +16,36 @@ app.use((req, res, next) => {
   return next();
 });
 
-app.use(bodyParser())
 
+// ****** Allen's edit below for login *******
+// when user sign up, go to createUser controller to create account
+// run bcrypt on the input password, and create user with the encrypted password
+// go to cookieController set SSID cookie
+// finds the correct user and set the cookie ssid with the database id
+// start a session
+// redirect to secret page that logs list of users and encrypted password
+app.post('/signup', userController.createUser, /*cookieController.setSSIDCookie,
+ sessionController.startSession,*/ (req, res) => {
+   console.log("inside post anonymous")
+  // what should happen here on successful sign up?
+  return res.status(200).json("sign up success!!!");
+
+  // redirect to secret
+  // res.redirect('/secret');
+
+  // send status code 202, also send body from local
+  // return res.status(202).json(res.locals.user);
+});
+
+// *********************************************
 // sends a GET request to retreive the bundle.js
 app.use('/build', (req, res) => res.sendFile((path.resolve(__dirname, '../build/bundle.js'))));
 
+
+
 app.use('/', (req, res) => res.sendFile(path.resolve(__dirname, '../client/index.html')));
+
+
 
 
 
