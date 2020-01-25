@@ -15,7 +15,10 @@ app.use((req, res, next) => {
 
 app.use(bodyParser())
 
+// sends a GET request to retreive the bundle.js
+app.use('/build', (req, res) => res.sendFile((path.resolve(__dirname, '../build/bundle.js'))));
 
+app.use('/', (req, res) => res.sendFile(path.resolve(__dirname, '../client/index.html')));
 
 
 
