@@ -1,0 +1,33 @@
+* {
+  box-sizing: border-box;
+  font-family: 'Ubuntu Light', 'Century Gothic', sans-serif;
+  margin: 0;
+  padding: 0;
+  color: #393939;
+  background-color: #FFF;
+}
+
+body {
+  padding-top:10px;
+}
+
+h1 {
+  text-align: center;
+}
+
+.outerBox {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 10px;
+  box-shadow: 10px 15px 39px rgba(0, 0, 0, .2);
+  border-radius: 5px;
+}
+
+.innerbox {
+  padding: 10px;
+  width:95%;
+  margin: 15px auto;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, .2);
+}
+
+
