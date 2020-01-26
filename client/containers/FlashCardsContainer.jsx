@@ -6,7 +6,9 @@ class FlashCardsContainer extends Component {
   render() {
     return (
       <div className="innerbox">
-        <h3>Stack of Flash Cards</h3>
+        <h3>FlashCardsContainers</h3>
+        <h4>Stack of Flash Cards</h4>
+
         <ul>
           <li>Example flashCard one</li>
         </ul>

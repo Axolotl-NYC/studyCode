@@ -4,14 +4,20 @@ import Description from '../components/Description.jsx';
 import Resources from '../components/Resources.jsx';
 
 class UnitContainer extends React.Component {
+
+  //should be getting props as
+
+  
+
   render() {
+
     return (
       <div className="container">
         <div className="outerBox">
-          <h3 >Unit name here</h3>
         
           {/* Description Component */}
-          <Description />
+          <Description description={this.props.description}
+          sub_units={this.props.sub_units} />
           <FlashCardsContainer />
           {/* Resources Component */}
           <Resources />

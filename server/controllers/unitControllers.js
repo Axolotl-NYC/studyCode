@@ -8,7 +8,7 @@ unitControllers.getUnits = (req, res, next) => {
   const queryString = 'SELECT * FROM units;';
   db.query(queryString)
     .then((response) => {
-      console.log('response is:', response);
+      console.log('response is:', response.rows);
       res.locals.units = response.rows;
       return next();
     });
