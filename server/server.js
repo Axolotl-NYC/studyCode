@@ -18,13 +18,22 @@ app.use((req, res, next) => {
 
 app.use(bodyParser());
 
+// handles incoming request to /units endpoint
 
 app.get('/units', unitControllers.getUnits, (req, res) => {
   res.status(200).json(res.locals.units);
 });
 
-app.get('/units/:id', flashcardControllers.getFlashcards, (req, res) => {
+app.get('/units/:unitId', flashcardControllers.getFlashcards, (req, res) => {
   res.status(200).json(res.locals.flashcards);
+});
+
+app.post('/units/:unitId', flashcardControllers.addedFlashcards, (req, res) => {
+  res.status(200).json('flashcard successfully added!');
+});
+
+app.delete('/units/:unitId', flashcardControllers.deleteFlashcards, (req, res) => {
+  res.status(200).json('flashcard successfully deleted!');
 });
 
 
