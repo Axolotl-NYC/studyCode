@@ -5,6 +5,9 @@ const bodyParser = require('body-parser');
 const app = express();
 const PORT = 3000;
 const unitControllers = require('./controllers/unitControllers.js');
+const flashcardControllers = require('./controllers/flashcardControllers.js');
+
+app.use(bodyParser());
 
 app.use((req, res, next) => {
   console.log(`******* FLOW TEST *******
@@ -15,13 +18,54 @@ app.use((req, res, next) => {
   return next();
 });
 
-app.use(bodyParser());
+
+// ****** below for signup / login *******
+// when user sign up, go to createUser controller to create account
+// run bcrypt on the input password, and create user with the encrypted password
+// TODO: go to cookieController set SSID cookie
+// TODO: finds the correct user and set the cookie ssid with the database id
+// TODO: start a session
+app.post('/signup', unitControllers.createUser, /*cookieController.setSSIDCookie,
+ sessionController.startSession,*/ (req, res) => {
+   console.log("inside signup post anonymous")
+  // what should happen here on successful sign up?
+  return res.status(200).json("sign up success!!!");
+
+});
+
+// app.post('/login', unitControllers.verifyUser, /*cookieController.setSSIDCookie,
+//  sessionController.startSession,*/ (req, res) => {
+//    console.log("inside login post anonymous")
+//   // what should happen here on successful sign up?
+//   return res.status(200).json("log in success!!!");
+
+// });
+
+// *********************************************
+
+// handles incoming request to /units endpoint
 
 app.get('/units', unitControllers.getUnits, (req, res) => {
   res.status(200).json(res.locals.units);
 });
+
+app.get('/units/:unitId', flashcardControllers.getFlashcards, (req, res) => {
+  res.status(200).json(res.locals.flashcards);
+});
+
+app.post('/units/:unitId', flashcardControllers.addedFlashcards, (req, res) => {
+  res.status(200).json('flashcard successfully added!');
+});
+
+app.delete('/units/:unitId', flashcardControllers.deleteFlashcards, (req, res) => {
+  res.status(200).json('flashcard successfully deleted!');
+});
+
+
 // sends a GET request to retreive the bundle.js
 app.use('/build', (req, res) => res.sendFile((path.resolve(__dirname, '../build/bundle.js'))));
+
+
 
 app.use('/', (req, res) => res.sendFile(path.resolve(__dirname, '../client/index.html')));
 
