@@ -7,7 +7,7 @@ const PG_URI = 'postgres://ytpkcqfa:oqTNzIIgcDQeKzVAJbnqYEoQ03HXGLsv@rajje.db.el
 
 const pool = new Pool({
   connectionString: PG_URI,
-});
+})
 
 
 // We export an object that contains a property called query,

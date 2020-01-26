@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const app = express();
 const PORT = 3000;
 const unitControllers = require('./controllers/unitControllers.js');
+const flashcardControllers = require('./controllers/flashcardControllers.js');
 
 app.use((req, res, next) => {
   console.log(`******* FLOW TEST *******
@@ -17,9 +18,16 @@ app.use((req, res, next) => {
 
 app.use(bodyParser());
 
+
 app.get('/units', unitControllers.getUnits, (req, res) => {
   res.status(200).json(res.locals.units);
 });
+
+app.get('/units/:id', flashcardControllers.getFlashcards, (req, res) => {
+  res.status(200).json(res.locals.flashcards);
+});
+
+
 // sends a GET request to retreive the bundle.js
 app.use('/build', (req, res) => res.sendFile((path.resolve(__dirname, '../build/bundle.js'))));
 
