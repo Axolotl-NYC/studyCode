@@ -36,7 +36,6 @@ class App extends Component {
 
     // https://dev.to/nburgess/creating-a-react-app-with-react-router-and-an-express-backend-33l3
 
-    // each page should be its own bigger component 
   }
 
 
@@ -48,11 +47,9 @@ class App extends Component {
       return <h1>WE LOADING BABY</h1>;
     } 
 
-    // once the data is fetched 
-
     return (
       <div>
-        <h1>CodeSmith-Study</h1>
+        <h1>CS-Study</h1>
         {/* start with links in regular format then make into component */}
         <nav>
         <h3>Pick a Unit</h3>
@@ -64,7 +61,7 @@ class App extends Component {
         </ul>
         </nav>
         {/* Want to switch to a different unit container based on which link was hit in the navbar */}
-        <UnitContainer  />
+        {/* <UnitContainer  /> */}
       </div>
     )
 
