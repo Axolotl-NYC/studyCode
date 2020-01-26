@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const app = express();
 const PORT = 3000;
 const unitControllers = require('./controllers/unitControllers.js');
+const flashcardControllers = require('./controllers/flashcardControllers.js');
 
 app.use(bodyParser());
 
@@ -42,9 +43,25 @@ app.post('/signup', unitControllers.createUser, /*cookieController.setSSIDCookie
 
 // *********************************************
 
+// handles incoming request to /units endpoint
+
 app.get('/units', unitControllers.getUnits, (req, res) => {
   res.status(200).json(res.locals.units);
 });
+
+app.get('/units/:unitId', flashcardControllers.getFlashcards, (req, res) => {
+  res.status(200).json(res.locals.flashcards);
+});
+
+app.post('/units/:unitId', flashcardControllers.addedFlashcards, (req, res) => {
+  res.status(200).json('flashcard successfully added!');
+});
+
+app.delete('/units/:unitId', flashcardControllers.deleteFlashcards, (req, res) => {
+  res.status(200).json('flashcard successfully deleted!');
+});
+
+
 // sends a GET request to retreive the bundle.js
 app.use('/build', (req, res) => res.sendFile((path.resolve(__dirname, '../build/bundle.js'))));
 
