@@ -6,7 +6,6 @@ class DATASTRUCTURES extends Component {
 
     const currentUnit = this.props.state;
 
-    console.log('PASSEDDOWN STATE:', currentUnit);
     return (
       <div>
         <h1>{currentUnit.unit}</h1>
