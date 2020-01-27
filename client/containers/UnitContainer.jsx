@@ -34,11 +34,10 @@ class UnitContainer extends React.Component {
     .catch(err => console.log('ERROR IN FLASHCARDS:', err));
   }
 
-  addFlashCard(e) {
+  addFlashCard() {
     /*
       Function to add a new flashCard to our database
     */
-
     const addFlashCardURL = `/units/${this.props.id}`
 
     fetch(addFlashCardURL, {
@@ -77,11 +76,16 @@ class UnitContainer extends React.Component {
     })
     .catch(err => console.log('ERROR IN FLASHCARDS:', err));
 
-    const resourcesURL = `/resources/${unitID}`
+    const resourcesURL = `/resources/${unitId}`
 
-    // want to fetch the resources
-    // fetch(resourcesURL)
-    // .then()
+    fetch(resourcesURL)
+    .then(res => res.json())
+    .then(data => {
+      this.setState({
+        resources: data,
+      })
+    })
+    .catch(err => console.log('ERROR IN RESOURCES', err));
   }
 
   render() {
@@ -99,7 +103,7 @@ class UnitContainer extends React.Component {
           <Description description={this.props.description}
           sub_units={this.props.sub_units} />
           <FlashCardsContainer flashCards={this.state.flashCards} id={this.props.id} addFlashCard={this.addFlashCard}/>
-          <Resources />
+          <Resources resources={this.state.resources} />
         </div>
       </div>
     );

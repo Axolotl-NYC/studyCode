@@ -8,15 +8,6 @@ import GIT from './components/GIT.jsx';
 import ALGORITHMS from './components/ALGORITHMS.jsx';
 import NavBar from './NavBar.jsx';
 
-
-/* want to do the routing in our index.js where we actually render the elements
-
-// might be able to pass state into different route paths and components here
-// for example if we can pass state into component OOPROUTE TEST
-// using the inline render function 
-
-*/
-
 // creating a router component here that will be rendered to 
 class RoutingApp extends Component {
   constructor(props) {
@@ -28,7 +19,6 @@ class RoutingApp extends Component {
     }
 
   }
-
 
   componentDidMount() {
     // fetching state after component mounts
@@ -45,6 +35,7 @@ class RoutingApp extends Component {
   }
 
   render() {
+
     if (!this.state.postDidMount) {
       return <h1>We LOADING BABY!</h1>
     }

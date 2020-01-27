@@ -6,11 +6,8 @@ module.exports = {
     publicPath: '/build/',
     // port: 8080,
     proxy: {
-<<<<<<< HEAD
       '/': 'http://localhost:3000',
-=======
-      '/units': 'http://localhost:3000',
->>>>>>> dev
+      '/units': 'http://localhost:3000,',
       '/resources': 'http://localhost:3000',
     },
   },
