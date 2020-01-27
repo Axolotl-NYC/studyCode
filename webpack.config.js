@@ -7,6 +7,7 @@ module.exports = {
     // port: 8080,
     proxy: {
       '/': 'http://localhost:3000',
+      '/resources': 'http://localhost:3000',
     },
   },
   entry: './client/index.js',

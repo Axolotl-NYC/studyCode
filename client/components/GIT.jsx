@@ -5,8 +5,7 @@ class GIT extends Component {
   render() {
 
     const currentUnit = this.props.state;
-
-    console.log('PASSEDDOWN STATE:', currentUnit);
+    
     return (
       <div>
         <h1>{currentUnit.unit}</h1>
