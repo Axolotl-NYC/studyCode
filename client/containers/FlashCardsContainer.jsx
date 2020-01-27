@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import FlashCards from '../components/FlashCards.jsx'
 
 
 class FlashCardsContainer extends Component {
@@ -13,7 +14,10 @@ class FlashCardsContainer extends Component {
 
       const { id, unit_id, question, answer} = this.props.flashCards[i];
 
-      flashCardsArr.push(<li>{question}</li>);
+      // flashCardsArr.push(<li>{question}</li>);
+
+      flashCardsArr.push(<FlashCards id={id} question={question} answer={answer} unit_id={unit_id}  />)
+
     }
 
 
@@ -22,9 +26,9 @@ class FlashCardsContainer extends Component {
         <h3>FlashCardsContainers</h3>
         <h4>Stack of Flash Cards</h4>
 
-        <ul>
+        <div className="flashCardList">
           {flashCardsArr}
-        </ul>
+        </div>
         <input type="text" placeholder="question" id="question" ></input>
         <input type="text" placeholder="answer" id="answer"></input>
         <button onClick={() => this.props.addFlashCard()}>Add Card</button>

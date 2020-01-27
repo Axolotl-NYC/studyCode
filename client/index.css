@@ -37,4 +37,26 @@ h1 {
   box-shadow: 5px 5px 15px rgba(0, 0, 0, .2);
 }
 
+#navBar {
+  padding: 10px;
+}
 
+#navbarList, a {
+  display: flex;
+  justify-content: space-evenly;
+  list-style-type: none;
+  text-decoration: none;
+  padding: 10px;
+  border: 1px solid red;
+}
+
+.flashCardList {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.flashCard_question {
+  padding: 20px;
+  border: 1px red solid;
+  font-size: .5em;
+}
