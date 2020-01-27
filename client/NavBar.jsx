@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import UnitContainer from './containers/UnitContainer.jsx';
 
 // class to render our main app 
-class App extends Component {
+class NavBar extends Component {
 
   constructor(props) {
     super(props)
@@ -50,18 +49,14 @@ class App extends Component {
     return (
       <div>
         <h1>CS-Study</h1>
-        {/* start with links in regular format then make into component */}
-        <nav>
-        <h3>Pick a Unit</h3>
-        <ul>
+        <nav id='navBar'>
+        <ul id='navbarList'>
           <li><a href={`/${unitsArr[0].unit}`} >{unitsArr[0].unit}</a></li>
           <li><a href={`/${unitsArr[1].unit}`}>{unitsArr[1].unit}</a></li>
           <li><a href={`/${unitsArr[2].unit}`}>{unitsArr[2].unit}</a></li>
           <li><a href={`/${unitsArr[3].unit}`}>{unitsArr[3].unit}</a></li>
         </ul>
         </nav>
-        {/* Want to switch to a different unit container based on which link was hit in the navbar */}
-        {/* <UnitContainer  /> */}
       </div>
     )
 
@@ -70,4 +65,4 @@ class App extends Component {
 
 
 
-export default App;
+export default NavBar;

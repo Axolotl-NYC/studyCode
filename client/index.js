@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
-import App from './App.jsx';
 import './index.css';
-import { Route, Link, BrowserRouter as Router } from 'react-router-dom';
+import { Route, BrowserRouter as Router } from 'react-router-dom';
 import OOP from './components/OOP.jsx';
 import DATASTRUCTURES from './components/DATASTRUCTURES.jsx';
 import GIT from './components/GIT.jsx';
 import ALGORITHMS from './components/ALGORITHMS.jsx';
+import NavBar from './NavBar.jsx';
 
 
 /* want to do the routing in our index.js where we actually render the elements
@@ -59,7 +59,7 @@ class RoutingApp extends Component {
     return (
       <Router>
         <div>
-          <Route exact path="/" component={App} />
+          <Route path="/" component={NavBar} />
           <Route path="/OOP"
             render={() => <OOP state={this.state.units[0]} />} />
           <Route path="/DATA STRUCTURES"
