@@ -102,7 +102,7 @@ class UnitContainer extends React.Component {
         <div className="outerBox">
           <Description description={this.props.description}
           sub_units={this.props.sub_units} />
-          <FlashCardsContainer flashCards={this.state.flashCards} id={this.props.id} addFlashCard={this.addFlashCard}/>
+          <FlashCardsContainer flashCards={this.state.flashCards} id={this.props.id} addFlashCard={this.addFlashCard} reRender={this.reRender}/>
           <Resources resources={this.state.resources} />
         </div>
       </div>
