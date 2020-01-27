@@ -8,15 +8,6 @@ import GIT from './components/GIT.jsx';
 import ALGORITHMS from './components/ALGORITHMS.jsx';
 import NavBar from './NavBar.jsx';
 
-
-/* want to do the routing in our index.js where we actually render the elements
-
-// might be able to pass state into different route paths and components here
-// for example if we can pass state into component OOPROUTE TEST
-// using the inline render function 
-
-*/
-
 // creating a router component here that will be rendered to 
 class RoutingApp extends Component {
   constructor(props) {
@@ -29,16 +20,12 @@ class RoutingApp extends Component {
 
   }
 
-
   componentDidMount() {
-
-
     // fetching state after component mounts
     const unitsURL = '/units'
     fetch(unitsURL)
       .then(data => data.json())
       .then(data => {
-        console.log('MY UNITS DATA:', data);
         this.setState({
           units: data,
           postDidMount: true,
@@ -49,17 +36,21 @@ class RoutingApp extends Component {
 
   render() {
 
-    // can render the different routes here
-
     if (!this.state.postDidMount) {
       return <h1>We LOADING BABY!</h1>
     }
 
+    /**
+     * Need to find a better way of modularizing each of the renders
+     * Each of the specific pages are the same
+     * Breaking the DRY principle 
+     * Would need to make a Page component that would be a route path
+     */
 
     return (
       <Router>
         <div>
-          <Route path="/" component={NavBar} />
+          <Route path="/" render={() => <NavBar units={this.state.units} />} />
           <Route path="/OOP"
             render={() => <OOP state={this.state.units[0]} />} />
           <Route path="/DATA STRUCTURES"

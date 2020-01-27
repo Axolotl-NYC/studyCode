@@ -3,10 +3,8 @@ import UnitContainer from '../containers/UnitContainer.jsx';
 
 class OOP extends Component {
   render() {
-
     const currentUnit = this.props.state;
 
-    console.log('PASSEDDOWN STATE:', currentUnit);
     return (
       <div>
         <h1>{currentUnit.unit}</h1>

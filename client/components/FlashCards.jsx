@@ -1,11 +1,10 @@
 import React, {Component} from 'react'
 
-
 class FlashCard extends Component {
   constructor(props) {
     super(props)
 
-    this.state ={
+    this.state = {
       question: true,
     }
 
@@ -51,10 +50,6 @@ class FlashCard extends Component {
       );
   }
 }
-
-// each flash card should have switch between its question and answer
-
-
 
 
 export default FlashCard;

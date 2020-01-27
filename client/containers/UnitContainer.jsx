@@ -4,7 +4,6 @@ import Description from '../components/Description.jsx';
 import Resources from '../components/Resources.jsx';
 
 class UnitContainer extends React.Component {
-
   constructor(props) {
     super(props)
 
@@ -18,8 +17,8 @@ class UnitContainer extends React.Component {
     this.reRender = this.reRender.bind(this);
   }
 
+  // inelegant way of reRendering the page after a change has been made
   reRender() {
-    //fetch from sever the flash cards data
     const unitId = this.props.id;
 
     const flashCardsURL = `/units/${unitId}`;
@@ -27,7 +26,6 @@ class UnitContainer extends React.Component {
     fetch(flashCardsURL)
     .then(res => res.json())
     .then(data => {
-      // console.log('ARR OF FLASHCARDS:',data);
       this.setState({
         flashCards: data,
         didLoad: true,
@@ -36,16 +34,10 @@ class UnitContainer extends React.Component {
     .catch(err => console.log('ERROR IN FLASHCARDS:', err));
   }
 
-
-  addFlashCard(e) {
-    //be able to add a new flashCard
-
-    // post request to the unit we are currently on
-    // this.props.id
-
-
-    // need to grab question, answer, and created_by as keys
-
+  addFlashCard() {
+    /*
+      Function to add a new flashCard to our database
+    */
     const addFlashCardURL = `/units/${this.props.id}`
 
     fetch(addFlashCardURL, {
@@ -57,17 +49,18 @@ class UnitContainer extends React.Component {
         question: document.getElementById('question').value,
         answer: document.getElementById('answer').value,
       }),
-    })
+    }
+    )
     .then(res => res.json())
-    .then(data => {
-      console.log(data)
-      this.reRender();
-  })
+    .then(() => this.reRender())
     .catch(err => console.log('err:', err));
   }
 
   componentDidMount() {
-    //fetch from sever the flash cards data
+    /*
+     * Each page i.e. (OOP, GIT...) will have a unitContainer component.
+     * Within each respective unit container component, we want to fetch flashCards and resources.
+     */
     const unitId = this.props.id;
 
     const flashCardsURL = `/units/${unitId}`;
@@ -75,18 +68,31 @@ class UnitContainer extends React.Component {
     fetch(flashCardsURL)
     .then(res => res.json())
     .then(data => {
-      // console.log('ARR OF FLASHCARDS:',data);
       this.setState({
         flashCards: data,
         didLoad: true,
-      }, () => console.log('STATE AFTER SETTING STATE',this.state));
+      }
+      );
     })
     .catch(err => console.log('ERROR IN FLASHCARDS:', err));
 
+    const resourcesURL = `/resources/${unitId}`
+
+    fetch(resourcesURL)
+    .then(res => res.json())
+    .then(data => {
+      this.setState({
+        resources: data,
+      })
+    })
+    .catch(err => console.log('ERROR IN RESOURCES', err));
   }
 
   render() {
-    //conditonally render to get state
+    /***
+     * conditonally render to get state 
+     * a bit slow need to come back and refactor/fix
+     */
     if (!this.state.didLoad) {
       return <h1>WE LOADING BABY</h1>
     }
@@ -94,13 +100,10 @@ class UnitContainer extends React.Component {
     return (
       <div className="container">
         <div className="outerBox">
-        
-          {/* Description Component */}
           <Description description={this.props.description}
           sub_units={this.props.sub_units} />
           <FlashCardsContainer flashCards={this.state.flashCards} id={this.props.id} addFlashCard={this.addFlashCard}/>
-          {/* Resources Component */}
-          <Resources />
+          <Resources resources={this.state.resources} />
         </div>
       </div>
     );
