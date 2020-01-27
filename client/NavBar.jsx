@@ -19,7 +19,7 @@ class NavBar extends Component {
 
     return (
       <div>
-        <h1>CS-Study</h1>
+        <h1>CS Study Planner</h1>
         <nav id='navBar'>
         <ul id='navbarList'>
           {/* <li><a href={`/${unitsArr[0].unit}`} >{unitsArr[0].unit}</a></li>
