@@ -7,6 +7,9 @@ const PORT = 3000;
 const unitControllers = require('./controllers/unitControllers.js');
 const flashcardControllers = require('./controllers/flashcardControllers.js');
 
+const graphQLHTTP = require('express-graphql');
+const schema = require('./graphql/graphql.js')
+
 app.use(bodyParser());
 
 
@@ -27,7 +30,8 @@ app.use((req, res, next) => {
 // if no, account created using bcrypt to hash password, res.locals.create = {userCreated: true}
 
 app.post('/signup', unitControllers.createUser, (req, res) => {
-  console.log('inside signup post anonymous');
+  console.log("inside signup post anonymous")
+
   // what should happen here on successful sign up?
   return res.status(200).json(res.locals.create);
 });
@@ -35,12 +39,16 @@ app.post('/signup', unitControllers.createUser, (req, res) => {
 // when user log in, go to verifyUser controller to verify account
 // verifyUser will check if username exist in database
 // if NO, password WILL NOT be check, res.locals.login = {usernameVerified: false}
-// if YES, password check with bcrypt compare,
+
+// if YES, password check with bcrypt compare, 
+
 // correct password --> res.locals.login = {userId: id, usernameVerified: true, passwordVerified: true}
 // incorrect password --> res.locals.login = {userId: id, usernameVerified: true, passwordVerified: false}
 
 app.post('/login', unitControllers.verifyUser, (req, res) => {
-  console.log('inside login post anonymous');
+
+  console.log("inside login post anonymous")
+
   // what should happen here on successful log in?
   return res.status(200).json(res.locals.login);
 });
@@ -70,6 +78,10 @@ app.get('/resources/:unitId', unitControllers.getResources, (req, res) => {
   res.status(200).json(res.locals.resources);
 });
 
+app.use('/graphql', graphQLHTTP({
+  schema,
+  graphiql: true
+}))
 
 // sends a GET request to retreive the bundle.js
 app.use('/build', (req, res) => res.sendFile((path.resolve(__dirname, '../build/bundle.js'))));
