@@ -25,13 +25,12 @@ app.use((req, res, next) => {
 // TODO: go to cookieController set SSID cookie
 // TODO: finds the correct user and set the cookie ssid with the database id
 // TODO: start a session
-app.post('/signup', unitControllers.createUser, /*cookieController.setSSIDCookie,
- sessionController.startSession,*/ (req, res) => {
-   console.log("inside signup post anonymous")
-  // what should happen here on successful sign up?
-  return res.status(200).json("sign up success!!!");
-
-});
+app.post('/signup', unitControllers.createUser, /* cookieController.setSSIDCookie,
+ sessionController.startSession, */ (req, res) => {
+    console.log('inside signup post anonymous');
+    // what should happen here on successful sign up?
+    return res.status(200).json('sign up success!!!');
+  });
 
 // app.post('/login', unitControllers.verifyUser, /*cookieController.setSSIDCookie,
 //  sessionController.startSession,*/ (req, res) => {
@@ -53,7 +52,7 @@ app.get('/units/:unitId', flashcardControllers.getFlashcards, (req, res) => {
   res.status(200).json(res.locals.flashcards);
 });
 
-app.post('/units/:unitId', flashcardControllers.addedFlashcards, (req, res) => {
+app.post('/units/:unitId', flashcardControllers.addFlashcards, (req, res) => {
   res.status(200).json('flashcard successfully added!');
 });
 
@@ -64,7 +63,6 @@ app.delete('/units/:unitId', flashcardControllers.deleteFlashcards, (req, res) =
 
 // sends a GET request to retreive the bundle.js
 app.use('/build', (req, res) => res.sendFile((path.resolve(__dirname, '../build/bundle.js'))));
-
 
 
 app.use('/', (req, res) => res.sendFile(path.resolve(__dirname, '../client/index.html')));
