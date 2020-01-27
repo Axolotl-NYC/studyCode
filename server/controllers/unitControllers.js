@@ -49,11 +49,9 @@ unitControllers.createUser = (req, res, next) => {
       res.locals.create = {userCreated: false};
       return next();
     }
-  });
-
     // proceed to create username with hash password, if no such user exist in database
-  bcrypt.hash(password, SALT_WORK_FACTOR, (err, hash) =>{
-      
+    bcrypt.hash(password, SALT_WORK_FACTOR, (err, hash) =>{
+        
       console.log("Password and hash: ", password, hash);
       const insertUser = `INSERT INTO "userlogin" (username, password) VALUES ('${username}', '${hash}')`;
 
@@ -62,8 +60,9 @@ unitControllers.createUser = (req, res, next) => {
         res.locals.create = {userCreated: true};
         return next();
       })
-});
-
+    });
+    
+  });
 };
 
 /**
