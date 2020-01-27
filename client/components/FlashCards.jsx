@@ -7,8 +7,29 @@ class FlashCard extends Component {
     this.state = {
       question: true,
     }
-
+    this.deleteFlashCard = this.deleteFlashCard.bind(this);
     this.flipFlashCard = this.flipFlashCard.bind(this);
+  }
+
+  deleteFlashCard(e) {
+    /*
+      Function to delete a flashCard in our database
+    */
+    const deleteFlashCardURL = `/units/${this.props.unit_id}`
+
+    fetch(deleteFlashCardURL, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        id: e.target.value,
+      }),
+    }
+    )
+    .then(res => res.json())
+    .then(() => this.props.reRender())
+    .catch(err => console.log('err:', err));
   }
 
   // function to flip the flashcards value
@@ -36,15 +57,15 @@ class FlashCard extends Component {
     if (this.state.question) {
       return (
         <div className="flashCard_question" onClick={this.flipFlashCard}>
-          <p>{this.props.question}</p>
-          <button className="deleteCard" type="button">x</button>
+          <a id='questionP'>{this.props.question}</a>
+          <button onClick={this.deleteFlashCard} value={this.props.id} className="deleteCard" type="button">x</button>
         </div>
       );
     }
 
     return (
         <div className="flashCard_question" onClick={this.flipFlashCard}>
-          <p>{this.props.answer}</p>
+          <a id='questionP'>{this.props.answer}</a>
           <button className="deleteCard" type="button">x</button>
         </div>
       );

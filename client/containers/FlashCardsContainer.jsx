@@ -12,20 +12,20 @@ class FlashCardsContainer extends Component {
 
       // flashCardsArr.push(<li>{question}</li>);
 
-      flashCardsArr.push(<FlashCards id={id} question={question} answer={answer} unit_id={unit_id}  />)
+      flashCardsArr.push(<FlashCards id={id} question={question} answer={answer} unit_id={unit_id} reRender={this.props.reRender}/>)
 
     }
 
     return (
       <div className="innerbox">
-        <h3>FlashCardsContainers</h3>
-        <h4>Stack of Flash Cards</h4>
+        <h4>Flashcards</h4>
+
         <div className="flashCardList">
           {flashCardsArr}
         </div>
         <input type="text" placeholder="question" id="question" ></input>
         <input type="text" placeholder="answer" id="answer"></input>
-        <button onClick={() => this.props.addFlashCard()}>Add Card</button>
+        <button id='add' onClick={() => this.props.addFlashCard()}>Add Card</button>
       </div>
     );
   }
