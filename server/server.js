@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const app = express();
 const PORT = 3000;
 const unitControllers = require('./controllers/unitControllers.js');
+const flashcardControllers = require('./controllers/flashcardControllers.js');
 
 app.use(bodyParser());
 
@@ -36,8 +37,8 @@ app.post('/signup', unitControllers.createUser, (req, res) => {
 // verifyUser will check if username exist in database
 // if NO, password WILL NOT be check, res.locals.login = {usernameVerified: false}
 // if YES, password check with bcrypt compare, 
-  // correct password --> res.locals.login = {usernameVerified: true, passwordVerified: true}
-  // incorrect password --> res.locals.login = {usernameVerified: true, passwordVerified: false}
+  // correct password --> res.locals.login = {userId: id, usernameVerified: true, passwordVerified: true}
+  // incorrect password --> res.locals.login = {userId: id, usernameVerified: true, passwordVerified: false}
 
 app.post('/login', unitControllers.verifyUser, (req, res) => {
    console.log("inside login post anonymous")
@@ -48,12 +49,27 @@ app.post('/login', unitControllers.verifyUser, (req, res) => {
 
 // *********************************************
 
+// handles incoming request to /units endpoint
+
 app.get('/units', unitControllers.getUnits, (req, res) => {
   res.status(200).json(res.locals.units);
 });
+
+app.get('/units/:unitId', flashcardControllers.getFlashcards, (req, res) => {
+  res.status(200).json(res.locals.flashcards);
+});
+
+app.post('/units/:unitId', flashcardControllers.addFlashcards, (req, res) => {
+  res.status(200).json('flashcard successfully added!');
+});
+
+app.delete('/units/:unitId', flashcardControllers.deleteFlashcards, (req, res) => {
+  res.status(200).json('flashcard successfully deleted!');
+});
+
+
 // sends a GET request to retreive the bundle.js
 app.use('/build', (req, res) => res.sendFile((path.resolve(__dirname, '../build/bundle.js'))));
-
 
 
 app.use('/', (req, res) => res.sendFile(path.resolve(__dirname, '../client/index.html')));

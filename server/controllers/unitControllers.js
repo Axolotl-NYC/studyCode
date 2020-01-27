@@ -6,10 +6,9 @@ const unitControllers = {};
 
 unitControllers.getUnits = (req, res, next) => {
   const queryString = 'SELECT * FROM units;';
-  console.log('hitting here')
   db.query(queryString)
     .then((response) => {
-      console.log('response is:', response);
+      console.log('response is:', response.rows);
       res.locals.units = response.rows;
       return next();
     });
@@ -62,8 +61,8 @@ unitControllers.createUser = (req, res, next) => {
 // verifyUser will check if username exist in database
 // if NO, password WILL NOT be check, res.locals.login = {usernameVerified: false}
 // if YES, password check with bcrypt compare, 
-  // correct password --> res.locals.login = {usernameVerified: true, passwordVerified: true}
-  // incorrect password --> res.locals.login = {usernameVerified: true, passwordVerified: false}
+  // correct password --> res.locals.login = {userId: id, usernameVerified: true, passwordVerified: true}
+  // incorrect password --> res.locals.login = {userId: id, usernameVerified: true, passwordVerified: false}
 unitControllers.verifyUser = (req, res, next) => {
   // write code here
     const {username, password} = req.body;
@@ -83,6 +82,7 @@ unitControllers.verifyUser = (req, res, next) => {
 
         // result will be true if it's a match, false otherwise;
           res.locals.login = {
+            userId: response.rows[0].id,
             userNameVerified: true,
             passwordVerified: result
           };

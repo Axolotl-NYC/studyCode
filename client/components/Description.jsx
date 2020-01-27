@@ -6,13 +6,19 @@ import UnitChecklist from './UnitChecklist.jsx';
 class Description extends Component {
 
   render() {
-    // ideally be able to fetch the database description here
+
+
+
     return (
       <div className="innerbox">
         <article>
-          <p>Fetch database description here</p>
+          <p>{this.props.description}</p>
         </article>
-        <UnitChecklist />
+        <h4>Sub Topics:</h4>
+        <p>{this.props.sub_units}</p>
+        
+      {/* checklist is stretch */ }
+        
       </div>
     )
   };
