@@ -12,7 +12,7 @@ class FlashCardsContainer extends Component {
 
       // flashCardsArr.push(<li>{question}</li>);
 
-      flashCardsArr.push(<FlashCards id={id} question={question} answer={answer} unit_id={unit_id}  />)
+      flashCardsArr.push(<FlashCards id={id} question={question} answer={answer} unit_id={unit_id} reRender={this.props.reRender}/>)
 
     }
 
