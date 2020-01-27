@@ -44,6 +44,7 @@ app.post('/signup', unitControllers.createUser, /* cookieController.setSSIDCooki
 
 // handles incoming request to /units endpoint
 
+
 app.get('/units', unitControllers.getUnits, (req, res) => {
   res.status(200).json(res.locals.units);
 });
@@ -58,6 +59,10 @@ app.post('/units/:unitId', flashcardControllers.addFlashcards, (req, res) => {
 
 app.delete('/units/:unitId', flashcardControllers.deleteFlashcards, (req, res) => {
   res.status(200).json('flashcard successfully deleted!');
+});
+
+app.get('/resources/:unitId', unitControllers.getResources, (req, res) => {
+  res.status(200).json(res.locals.resources);
 });
 
 
