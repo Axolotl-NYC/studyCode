@@ -25,7 +25,7 @@ class FlashCardsContainer extends Component {
         </div>
         <input type="text" placeholder="question" id="question" ></input>
         <input type="text" placeholder="answer" id="answer"></input>
-        <button onClick={() => this.props.addFlashCard()}>Add Card</button>
+        <button id='add' onClick={() => this.props.addFlashCard()}>Add Card</button>
       </div>
     );
   }

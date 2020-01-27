@@ -7,10 +7,8 @@
 }
 
 body {
-  /* padding-top:10px; */
   background-color: #020C25;
   color: white;
-  /* background-image: url('./codesmith.jpg'); */
 }
 
 h1 {
@@ -22,9 +20,12 @@ h1 {
 
 #appTitle {
   font-size: 37px;
+  margin-bottom: 10px;
+  letter-spacing: 1px;
 }
 
 h4 {
+  color: #02A3E9;
   margin: 12px auto;
   font-size: 20px;
   text-decoration: underline;
@@ -34,14 +35,14 @@ h4 {
   max-width: 800px;
   margin: 0 auto;
   /* padding: 10px; */
-  box-shadow: 10px 15px 39px rgba(0, 0, 0, .2);
+  /* box-shadow: 10px 15px 39px rgba(0, 0, 0, .2); */
   border-radius: 5px;
 }
 
 .innerbox {
   width: 95%;
   margin: 5px auto;
-  box-shadow: 5px 5px 15px rgba(0, 0, 0, .2);
+  /* box-shadow: 5px 5px 15px rgba(0, 0, 0, .2); */
 }
 
 .loginsignup {
@@ -55,17 +56,21 @@ h4 {
   padding: 10px;
 }
 
-
-#navbarList, a {
-  color: white;
+#navbarList {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
+  list-style-type: none;
+  /* flex-direction: column; */
+}
+#navbarList a {
+  color: white;
+  flex: 1;
   list-style-type: none;
   text-decoration: none;
   padding: 10px;
   border: 3px solid white;
   border-radius: 5px;
-  box-shadow: 3px 3px 3px white;
+  box-shadow: 3px 4px 2px white;
   font-weight: 500px;
 }
 
@@ -83,4 +88,57 @@ a:hover {
   padding: 20px;
   border: 1px white solid;
   font-size: .5em;
+}
+
+#resourcesList {
+  margin-top: 10px;
+  text-align: left;
+}
+
+#resourcesList a{
+  color:white;
+}
+
+#add {
+  background-color: #02A3E9;
+  color: white;
+  width: 150px;
+  height: 60px;
+  border-radius: 3px;
+  font-size: 15px;
+  margin-left: 10px;
+}
+
+#add:hover {
+  background-color: white;
+  color: #02A3E9;
+}
+
+button {
+  background-color: #02A3E9;
+  color: white;
+  width: 30px;
+  height: 15px;
+  border-radius: 3px;
+  font-size: 10px;
+  margin-left: 20px;
+}
+
+button:hover {
+  background-color: white;
+  color: #02A3E9;
+}
+
+input {
+  margin: 15px;
+  width: 250px;
+  height: 80px;
+}
+
+#questionP {
+  font-size: 15px;
+}
+
+.flashCardList {
+  display: block;
 }

@@ -6,7 +6,7 @@ class Resources extends Component {
     const resourcesArr = [];
 
     for (let i = 0; i < this.props.resources.length; i += 1) {
-      resourcesArr.push(<li><a href={this.props.resources[i].resources}>{this.props.resources[i].resources}</a></li>)
+      resourcesArr.push(<li id='resourcesList'><a href={this.props.resources[i].resources}>{this.props.resources[i].resources}</a></li>)
     }
 
     /**
