@@ -9,6 +9,7 @@ const flashcardControllers = require('./controllers/flashcardControllers.js');
 
 app.use(bodyParser());
 
+
 app.use((req, res, next) => {
   console.log(`******* FLOW TEST *******
   METHOD: ${req.method},
@@ -21,24 +22,30 @@ app.use((req, res, next) => {
 
 // ****** below for signup / login *******
 // when user sign up, go to createUser controller to create account
-// run bcrypt on the input password, and create user with the encrypted password
-// TODO: go to cookieController set SSID cookie
-// TODO: finds the correct user and set the cookie ssid with the database id
-// TODO: start a session
-app.post('/signup', unitControllers.createUser, /* cookieController.setSSIDCookie,
- sessionController.startSession, */ (req, res) => {
-    console.log('inside signup post anonymous');
-    // what should happen here on successful sign up?
-    return res.status(200).json('sign up success!!!');
-  });
+// createUser will check if username already exist in database
+// if YES, account WILL NOT be created, res.locals.create = {userCreated: false}
+// if no, account created using bcrypt to hash password, res.locals.create = {userCreated: true}
 
-// app.post('/login', unitControllers.verifyUser, /*cookieController.setSSIDCookie,
-//  sessionController.startSession,*/ (req, res) => {
-//    console.log("inside login post anonymous")
-//   // what should happen here on successful sign up?
-//   return res.status(200).json("log in success!!!");
+app.post('/signup', unitControllers.createUser, (req, res) => {
+   console.log("inside signup post anonymous")
+  // what should happen here on successful sign up?
+  return res.status(200).json(res.locals.create);
 
-// });
+});
+
+// when user log in, go to verifyUser controller to verify account
+// verifyUser will check if username exist in database
+// if NO, password WILL NOT be check, res.locals.login = {usernameVerified: false}
+// if YES, password check with bcrypt compare, 
+  // correct password --> res.locals.login = {userId: id, usernameVerified: true, passwordVerified: true}
+  // incorrect password --> res.locals.login = {userId: id, usernameVerified: true, passwordVerified: false}
+
+app.post('/login', unitControllers.verifyUser, (req, res) => {
+   console.log("inside login post anonymous")
+  // what should happen here on successful log in?
+  return res.status(200).json(res.locals.login);
+
+});
 
 // *********************************************
 
