@@ -59,7 +59,7 @@ class RoutingApp extends Component {
     return (
       <Router>
         <div>
-          <Route path="/" component={NavBar} />
+          <Route exact path="/" render={() => <div style={{ backgroundImage: "url(https://i.ytimg.com/vi/hToEL-nNtyM/maxresdefault.jpg)", backgroundSize: "100% 100%", height: '100vh', position: 'absolute', zIndex: -1, top: 0, bottom: 0, left: 0, right: 0 }} />} />  
           <Route path="/OOP"
             render={() => <OOP state={this.state.units[0]} />} />
           <Route path="/DATA STRUCTURES"

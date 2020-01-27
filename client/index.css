@@ -1,32 +1,46 @@
 * {
   box-sizing: border-box;
-  font-family: 'Ubuntu Light', 'Century Gothic', sans-serif;
+  font-family: "Open Sans", sans-serif;
   margin: 0;
   padding: 0;
-  color: #393939;
-  background-color: #FFF;
+  text-align: center;
 }
 
 body {
-  padding-top:10px;
+  /* padding-top:10px; */
+  background-color: #020C25;
+  color: white;
+  /* background-image: url('./codesmith.jpg'); */
 }
 
 h1 {
+  color: #02A3E9;
+  margin: 0px;
+  padding-top: 10px;
   text-align: center;
+}
+
+#appTitle {
+  font-size: 37px;
+}
+
+h4 {
+  margin: 12px auto;
+  font-size: 20px;
+  text-decoration: underline;
 }
 
 .outerBox {
   max-width: 800px;
   margin: 0 auto;
-  padding: 10px;
+  /* padding: 10px; */
   box-shadow: 10px 15px 39px rgba(0, 0, 0, .2);
   border-radius: 5px;
 }
 
 .innerbox {
-  padding: 10px;
-  width:95%;
-  margin: 15px auto;
+  width: 95%;
+  margin: 5px auto;
   box-shadow: 5px 5px 15px rgba(0, 0, 0, .2);
 }
 
@@ -41,13 +55,23 @@ h1 {
   padding: 10px;
 }
 
+
 #navbarList, a {
+  color: white;
   display: flex;
   justify-content: space-evenly;
   list-style-type: none;
   text-decoration: none;
   padding: 10px;
-  border: 1px solid red;
+  border: 3px solid white;
+  border-radius: 5px;
+  box-shadow: 3px 3px 3px white;
+  font-weight: 500px;
+}
+
+a:hover {
+  color: #02A3E9;
+  background-color: white;
 }
 
 .flashCardList {
@@ -57,6 +81,6 @@ h1 {
 
 .flashCard_question {
   padding: 20px;
-  border: 1px red solid;
+  border: 1px white solid;
   font-size: .5em;
 }

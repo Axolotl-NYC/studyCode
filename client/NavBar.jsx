@@ -48,13 +48,13 @@ class NavBar extends Component {
 
     return (
       <div>
-        <h1>CS-Study</h1>
+        <h1 id='appTitle'>CS Study Planner</h1>
         <nav id='navBar'>
         <ul id='navbarList'>
-          <li><a href={`/${unitsArr[0].unit}`} >{unitsArr[0].unit}</a></li>
-          <li><a href={`/${unitsArr[1].unit}`}>{unitsArr[1].unit}</a></li>
-          <li><a href={`/${unitsArr[2].unit}`}>{unitsArr[2].unit}</a></li>
-          <li><a href={`/${unitsArr[3].unit}`}>{unitsArr[3].unit}</a></li>
+          <li><a id='navLinks' href={`/${unitsArr[0].unit}`} >{unitsArr[0].unit}</a></li>
+          <li><a id='navLinks' href={`/${unitsArr[1].unit}`}>{unitsArr[1].unit}</a></li>
+          <li><a id='navLinks' href={`/${unitsArr[2].unit}`}>{unitsArr[2].unit}</a></li>
+          <li><a id='navLinks' href={`/${unitsArr[3].unit}`}>{unitsArr[3].unit}</a></li>
         </ul>
         </nav>
       </div>

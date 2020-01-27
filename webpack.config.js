@@ -6,6 +6,7 @@ module.exports = {
     publicPath: '/build/',
     // port: 8080,
     proxy: {
+      '/': 'http://localhost:3000',
       '/units': 'http://localhost:3000',
       '/resources': 'http://localhost:3000',
     },
@@ -31,6 +32,10 @@ module.exports = {
       {
         test: /\.(s*)css$/,
         use: ['style-loader', 'css-loader'],
+      },
+      {
+        test: /\.jpg$/,
+        loader: 'file-loader',
       },
     ],
   },

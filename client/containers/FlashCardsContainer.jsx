@@ -23,8 +23,7 @@ class FlashCardsContainer extends Component {
 
     return (
       <div className="innerbox">
-        <h3>FlashCardsContainers</h3>
-        <h4>Stack of Flash Cards</h4>
+        <h4>Flashcards</h4>
 
         <div className="flashCardList">
           {flashCardsArr}

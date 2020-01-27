@@ -14,7 +14,7 @@ class Description extends Component {
         <article>
           <p>{this.props.description}</p>
         </article>
-        <h4>Sub Topics:</h4>
+        <h4>Sub Topics</h4>
         <p>{this.props.sub_units}</p>
         
       {/* checklist is stretch */ }
