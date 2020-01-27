@@ -36,7 +36,7 @@ class FlashCard extends Component {
     if (this.state.question) {
       return (
         <div className="flashCard_question" onClick={this.flipFlashCard}>
-          <p>{this.props.question}</p>
+          <a id='questionP'>{this.props.question}</a>
           <button className="deleteCard" type="button">x</button>
         </div>
       );
@@ -44,7 +44,7 @@ class FlashCard extends Component {
 
     return (
         <div className="flashCard_question" onClick={this.flipFlashCard}>
-          <p>{this.props.answer}</p>
+          <a id='questionP'>{this.props.answer}</a>
           <button className="deleteCard" type="button">x</button>
         </div>
       );
