@@ -19,7 +19,7 @@ class App extends Component {
       units: [],
       postDidMount: false,
       currentUnitData: null,
-      currentUnitId: null,
+      currentUnitIndex: null,
     }
 
     this.updateCurrentUnit = this.updateCurrentUnit.bind(this);
@@ -33,7 +33,7 @@ class App extends Component {
     const currentUnitData = this.state.units[currentUnitId];
 
     this.setState({
-      currentUnitId: currentUnitId,
+      currentUnitIndex: currentUnitId,
       currentUnitData: currentUnitData,
     });
   }
@@ -96,11 +96,11 @@ class App extends Component {
         />
         { // conditional render precluded on if a NavBar selection was made, default is null.
           // Updates on NavBar selection
-          this.state.currentUnitId ?
+          this.state.currentUnitIndex !== null ?
           <UnitContainer
             // this.state.currentUnit is a string, needs hard set to Number
             // for the currentUnit index
-            state={ this.state.currentUnitData }
+            currentUnitData={ this.state.currentUnitData }
           />
           : <div></div>
         }

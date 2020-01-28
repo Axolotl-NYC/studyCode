@@ -13,55 +13,57 @@ class UnitContainer extends React.Component {
       didLoad: false,
     }
 
-    this.addFlashCard = this.addFlashCard.bind(this);
-    this.reRender = this.reRender.bind(this);
+    // this.addFlashCard = this.addFlashCard.bind(this);
+    // this.reRender = this.reRender.bind(this);
   }
 
   // inelegant way of reRendering the page after a change has been made
-  reRender() {
-    const unitId = this.props.id;
+  // reRender() {
+  //   const unitId = this.props.id;
 
-    const flashCardsURL = `/units/${unitId}`;
+  //   const flashCardsURL = `/units/${unitId}`;
 
-    fetch(flashCardsURL)
-    .then(res => res.json())
-    .then(data => {
-      this.setState({
-        flashCards: data,
-        didLoad: true,
-      }, () => console.log('STATE AFTER SETTING STATE',this.state));
-    })
-    .catch(err => console.log('ERROR IN FLASHCARDS:', err));
-  }
+  //   fetch(flashCardsURL)
+  //   .then(res => res.json())
+  //   .then(data => {
+  //     this.setState({
+  //       flashCards: data,
+  //       didLoad: true,
+  //     }, () => console.log('STATE AFTER SETTING STATE',this.state));
+  //   })
+  //   .catch(err => console.log('ERROR IN FLASHCARDS:', err));
+  // }
 
-  addFlashCard() {
-    /*
-      Function to add a new flashCard to our database
-    */
-    const addFlashCardURL = `/units/${this.props.id}`
+  // addFlashCard() {
+  //   /*
+  //     Function to add a new flashCard to our database
+  //   */
+  //   const addFlashCardURL = `/units/${this.props.id}`
 
-    fetch(addFlashCardURL, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        question: document.getElementById('question').value,
-        answer: document.getElementById('answer').value,
-      }),
-    }
-    )
-    .then(res => res.json())
-    .then(() => this.reRender())
-    .catch(err => console.log('err:', err));
-  }
+  //   fetch(addFlashCardURL, {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //     },
+  //     body: JSON.stringify({
+  //       question: document.getElementById('question').value,
+  //       answer: document.getElementById('answer').value,
+  //     }),
+  //   }
+  //   )
+  //   .then(res => res.json())
+  //   .then(() => this.reRender())
+  //   .catch(err => console.log('err:', err));
+  // }
 
   componentDidMount() {
     /*
      * Each page i.e. (OOP, GIT...) will have a unitContainer component.
      * Within each respective unit container component, we want to fetch flashCards and resources.
      */
-    const unitId = this.props.id;
+    const unitId = this.props.currentUnitData.id;
+
+    console.log('unitId', unitId);
 
     const flashCardsURL = `/units/${unitId}`;
 
@@ -97,18 +99,19 @@ class UnitContainer extends React.Component {
 
     return (
       <div className="container">
-        <h1>{ currentUnit.unit }</h1>
+        <h1>{ this.props.currentUnitData.unit }</h1>
         <div className="outerBox">
           <Description
-            description={ this.props.description }
-            sub_units={ this.props.sub_units } />
-          <FlashCardsContainer
+            description={ this.props.currentUnitData.description }
+            sub_units={ this.props.currentUnitData.sub_units } />
+          { /* <FlashCardsContainer
             flashCards={ this.state.flashCards }
             id={ this.props.id }
             addFlashCard={ this.addFlashCard }
             reRender={ this.reRender }/>
           <Resources
-            resources={ this.state.resources } />
+            resources={ this.state.resources } /> */
+            }
         </div>
       </div>
     );
