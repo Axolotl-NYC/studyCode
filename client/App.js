@@ -10,7 +10,7 @@ import './style/index.css';
 import NavBar from './components/NavBar.jsx';
 import UnitContainer from './containers/UnitContainer.jsx';
 
-// creating a router component here that will be rendered to 
+// creating a router component here that will be rendered to
 class App extends Component {
   constructor(props) {
     super(props)
@@ -18,7 +18,8 @@ class App extends Component {
     this.state = {
       units: [],
       postDidMount: false,
-      currentUnit: null,
+      currentUnitData: null,
+      currentUnitId: null,
     }
 
     this.updateCurrentUnit = this.updateCurrentUnit.bind(this);
@@ -26,9 +27,15 @@ class App extends Component {
 
   updateCurrentUnit(event) {
     // Updates the state with the current selection of units. Slices off the dynamically
-    // generated ID from the NavBar component at the lest index of the string. This ID
+    // generated ID from the NavBar component at the last index of the string. This ID
     // will be used to render the info comps below our nav based on selection -mp
-    this.setState({ currentUnit: event.target.id.slice(event.target.id.length - 1) });
+    const currentUnitId = Number(event.target.id.slice(event.target.id.length - 1)) - 1;
+    const currentUnitData = this.state.units[currentUnitId];
+
+    this.setState({
+      currentUnitId: currentUnitId,
+      currentUnitData: currentUnitData,
+    });
   }
 
   componentDidMount() {
@@ -89,9 +96,11 @@ class App extends Component {
         />
         { // conditional render precluded on if a NavBar selection was made, default is null.
           // Updates on NavBar selection
-          this.state.currentUnit ?
+          this.state.currentUnitId ?
           <UnitContainer
-            state={ this.state.units[this.state.currentUnit] }
+            // this.state.currentUnit is a string, needs hard set to Number
+            // for the currentUnit index
+            state={ this.state.currentUnitData }
           />
           : <div></div>
         }
@@ -99,9 +108,5 @@ class App extends Component {
     )
   }
 }
-
-
-
-
 
 render(<App />, document.getElementById('app'));
