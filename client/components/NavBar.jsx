@@ -11,8 +11,8 @@ class NavBar extends Component {
 
     const unitsLinks = [];
 
-    for (let i = 0; i < unitsArr.length; i += 1) {
-      unitsLinks.push(<li key={ `nav-bar list item ${i}` }><a id={`nav-bar-id${i}`} onClick={ (e) => this.props.updateCurrentUnit(e) }>{ unitsArr[i].unit }</a></li>)
+    for (let i = unitsArr.length - 1; i >= 0 ; i -= 1) {
+      unitsLinks.push(<li key={ `nav-bar list item ${ i }` }><a id={`nav-bar-id${ i }`} onClick={ (e) => this.props.updateCurrentUnit(e) }>{ unitsArr[i].unit }</a></li>)
     }
 
     console.log(unitsLinks);

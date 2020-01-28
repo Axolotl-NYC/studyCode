@@ -71,10 +71,8 @@ class UnitContainer extends React.Component {
       this.setState({
         flashCards: data,
         didLoad: true,
-      }
-      );
-    })
-    .catch(err => console.log('ERROR IN FLASHCARDS:', err));
+      });
+    }).catch(err => console.log('ERROR IN FLASHCARDS:', err));
 
     const resourcesURL = `/resources/${unitId}`
 

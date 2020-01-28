@@ -25,7 +25,7 @@ class App extends Component {
   updateCurrentUnit(event) {
     // Updates the state with the current selection of units. Slices off the dynamically
     // generated ID from the NavBar component at the lest index of the string. This ID
-    // will be used to render the info comps below our nav based on selection
+    // will be used to render the info comps below our nav based on selection -mp
     this.setState({ currentUnit: event.target.id.slice(event.target.id.length - 1) });
   }
 
@@ -44,7 +44,9 @@ class App extends Component {
   }
 
   componentDidUpdate() {
-    
+    if (this.state.currentUnit !== null) {
+
+    }
   }
 
   render() {
