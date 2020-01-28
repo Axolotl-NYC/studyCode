@@ -4,18 +4,6 @@ import Description from '../components/Description.jsx';
 import Resources from '../components/Resources.jsx';
 
 class UnitContainer extends React.Component {
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      flashCards: [],
-      resources: [],
-      didLoad: false,
-    }
-
-    // this.addFlashCard = this.addFlashCard.bind(this);
-    // this.reRender = this.reRender.bind(this);
-  }
 
   // inelegant way of reRendering the page after a change has been made
   // reRender() {
@@ -57,23 +45,18 @@ class UnitContainer extends React.Component {
   // }
 
   componentDidMount() {
-    /*
-     * Each page i.e. (OOP, GIT...) will have a unitContainer component.
-     * Within each respective unit container component, we want to fetch flashCards and resources.
-     */
-    const unitId = this.props.currentUnitData.id;
-
-    console.log('unitId', unitId);
-
+    const unitId = this.props.currentUnitData.id.toString();
     const flashCardsURL = `/units/${unitId}`;
+
+    console.log('UnitContainer did Mount')
 
     fetch(flashCardsURL)
     .then(res => res.json())
     .then(data => {
-      this.setState({
-        flashCards: data,
-        didLoad: true,
-      });
+
+      console.log('flashCardUrl data fetch', data)
+      //const passedObj = { flashCards: data };
+      this.props.updateDrilledState( { currentFlashCards: data } )
     }).catch(err => console.log('ERROR IN FLASHCARDS:', err));
 
     const resourcesURL = `/resources/${unitId}`
@@ -81,9 +64,7 @@ class UnitContainer extends React.Component {
     fetch(resourcesURL)
     .then(res => res.json())
     .then(data => {
-      this.setState({
-        resources: data,
-      })
+      this.props.updateDrilledState( { currentResources: data } )
     })
     .catch(err => console.log('ERROR IN RESOURCES', err));
   }
@@ -93,7 +74,7 @@ class UnitContainer extends React.Component {
      * conditonally render to get state 
      * a bit slow need to come back and refactor/fix
      */
-    if (!this.state.didLoad) {
+    if (this.props.currentUnitData === null) {
       return <h1>WE LOADING BABY</h1>
     }
 

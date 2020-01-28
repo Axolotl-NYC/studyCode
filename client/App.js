@@ -20,9 +20,12 @@ class App extends Component {
       postDidMount: false,
       currentUnitData: null,
       currentUnitIndex: null,
+      currentFlashCards: null,
+      currentResources: null,
     }
 
     this.updateCurrentUnit = this.updateCurrentUnit.bind(this);
+    this.updateDrilledState = this.updateDrilledState.bind(this)
   }
 
   updateCurrentUnit(event) {
@@ -36,6 +39,10 @@ class App extends Component {
       currentUnitIndex: currentUnitId,
       currentUnitData: currentUnitData,
     });
+  }
+
+  updateDrilledState(updateObject){
+    this.setState(updateObject);
   }
 
   componentDidMount() {
@@ -101,6 +108,9 @@ class App extends Component {
             // this.state.currentUnit is a string, needs hard set to Number
             // for the currentUnit index
             currentUnitData={ this.state.currentUnitData }
+            updateDrilledState={ this.updateDrilledState }
+            currentFlashCards={ this.state.currentFlashCards }
+            currentResources={ this.state.currentResources }
           />
           : <div></div>
         }
