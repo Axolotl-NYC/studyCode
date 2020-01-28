@@ -16,7 +16,7 @@ module.exports = {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'build'),
   },
-  mode: process.env.NODE_ENV,
+  mode: 'development',
   module: {
     rules: [
       {
