@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
+
 import './style/index.css';
-import { Route, BrowserRouter as Router } from 'react-router-dom';
-import OOP from './components/OOP.jsx';
-import DATASTRUCTURES from './components/DATASTRUCTURES.jsx';
-import GIT from './components/GIT.jsx';
-import ALGORITHMS from './components/ALGORITHMS.jsx';
+
+// import OOP from './components/OOP.jsx';
+// import DATASTRUCTURES from './components/DATASTRUCTURES.jsx';
+// import GIT from './components/GIT.jsx';
+// import ALGORITHMS from './components/ALGORITHMS.jsx';
 import NavBar from './components/NavBar.jsx';
+import UnitContainer from './containers/UnitContainer.jsx';
 
 // creating a router component here that will be rendered to 
 class App extends Component {
@@ -85,6 +87,14 @@ class App extends Component {
           units={ this.state.units }
           updateCurrentUnit= { this.updateCurrentUnit }
         />
+        { // conditional render precluded on if a NavBar selection was made, default is null.
+          // Updates on NavBar selection
+          this.state.currentUnit ?
+          <UnitContainer
+            state={ this.state.units[this.state.currentUnit] }
+          />
+          : <div></div>
+        }
       </section>
     )
   }
