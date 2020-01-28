@@ -10,9 +10,11 @@ class NavBar extends Component {
      */
 
     const unitsLinks = [];
-
+    // Array now reverses so the navBar displays in learning order istead of backwards.
+    // However... prior group set the DB ID's for units out of order as well. Will look
+    // into changing if possible.
     for (let i = unitsArr.length - 1; i >= 0 ; i -= 1) {
-      unitsLinks.push(<li key={ `nav-bar list item ${ i }` }><a id={`nav-bar-id${ i }`} onClick={ (e) => this.props.updateCurrentUnit(e) }>{ unitsArr[i].unit }</a></li>)
+      unitsLinks.push(<li key={ `nav-bar list item ${ unitsArr[i].id }` }><a id={`nav-bar-id${ unitsArr[i].id }`} onClick={ (e) => this.props.updateCurrentUnit(e) }>{ unitsArr[i].unit }</a></li>)
     }
 
     console.log(unitsLinks);
