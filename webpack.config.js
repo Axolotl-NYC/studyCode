@@ -11,7 +11,7 @@ module.exports = {
       '/resources': 'http://localhost:3000',
     },
   },
-  entry: './client/index.js',
+  entry: './client/App.js',
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'build'),

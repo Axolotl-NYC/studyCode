@@ -9,7 +9,7 @@ import ALGORITHMS from './components/ALGORITHMS.jsx';
 import NavBar from './NavBar.jsx';
 
 // creating a router component here that will be rendered to 
-class RoutingApp extends Component {
+class App extends Component {
   constructor(props) {
     super(props)
 
@@ -72,4 +72,5 @@ class RoutingApp extends Component {
 
 
 
-render(<RoutingApp />, document.getElementById('app'));
+
+render(<App />, document.getElementById('app'));
