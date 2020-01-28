@@ -19,7 +19,11 @@ class App extends Component {
       currentUnit: null,
     }
 
-    //this.updateCurrentUnit = this.updateCurrentUnit.bind(this);
+    this.updateCurrentUnit = this.updateCurrentUnit.bind(this);
+  }
+
+  updateCurrentUnit(unitId) {
+      this.setState({ currentUnit: unitId });
   }
 
   componentDidMount() {
@@ -39,13 +43,7 @@ class App extends Component {
   render() {
 
     if (!this.state.postDidMount) {
-      return (
-        <h1>We LOADING BABY!</h1>
-      )
-    }
-
-    const updateCurrentUnit = (unitId) => {
-      this.setState({ currentUnit: unitId });
+      return ( <h1>We LOADING BABY!</h1> )
     }
 
     /**
