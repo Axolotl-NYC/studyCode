@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
-import './index.css';
+import './style/index.css';
 import { Route, BrowserRouter as Router } from 'react-router-dom';
 import OOP from './components/OOP.jsx';
 import DATASTRUCTURES from './components/DATASTRUCTURES.jsx';
