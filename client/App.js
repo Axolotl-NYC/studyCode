@@ -3,10 +3,6 @@ import { render } from 'react-dom';
 
 import './style/index.css';
 
-// import OOP from './components/OOP.jsx';
-// import DATASTRUCTURES from './components/DATASTRUCTURES.jsx';
-// import GIT from './components/GIT.jsx';
-// import ALGORITHMS from './components/ALGORITHMS.jsx';
 import NavBar from './components/NavBar.jsx';
 import UnitContainer from './containers/UnitContainer.jsx';
 
@@ -39,20 +35,6 @@ class App extends Component {
       currentUnitIndex: currentUnitId,
       currentUnitData: currentUnitData,
     });
-  }
-
-  updateCurrentFlashCardsAndResources() {
-    const unitId = this.state.currentUnitData.id.toString();
-    const flashCardsURL = `/units/${unitId}`;
-
-    fetch(flashCardsURL)
-      .then((response) => response.json())
-      .then((data) => {
-        this.setState({
-            currentFlashCards: data.flashCards,
-            currentResources: data.resources,
-          })
-      }).catch((error) => console.log('ERROR IN FLASHCARDS: ', error));
   }
 
   updateDrilledState(updateObject){
