@@ -1,8 +1,10 @@
 import React from 'react';
+
 import NavBar from '../components/NavBar.jsx';
 import UnitContainer from './UnitContainer.jsx';
+import NewUnitContainer from './NewUnitContainer.jsx';
 
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, Link } from "react-router-dom";
 
 function MainContainer (props) {
   return (
@@ -10,6 +12,7 @@ function MainContainer (props) {
       <NavBar
         units={ props.units }
         updateCurrentUnit= { props.updateCurrentUnit } />
+      <Link to='/main-container/create-unit'>Create New Unit</Link>
         <Switch>
           <Route path="/main-container/units">
             { // conditional render precluded on if a NavBar selection was made, default is null.
@@ -30,6 +33,9 @@ function MainContainer (props) {
             />
               : <div></div>
             }
+          </Route>
+          <Route path='/main-container/create-unit'>
+            <NewUnitContainer />
           </Route>
         </Switch>
     </div>

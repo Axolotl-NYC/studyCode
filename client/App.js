@@ -142,11 +142,7 @@ class App extends Component {
 
   // function to flip the flashcards value on click should change state false
   flipFlashCard(arrayId) {
-    console.log('ArrayId', arrayId)
-
     const currentAnswersStateArray = this.state.questionsArray;
-
-    console.log('currentAnswersStateArray', currentAnswersStateArray)
 
     if (currentAnswersStateArray[arrayId]) currentAnswersStateArray[arrayId] = false;
     else currentAnswersStateArray[arrayId] = true;
