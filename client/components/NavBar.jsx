@@ -17,8 +17,6 @@ class NavBar extends Component {
       unitsLinks.push(<li key={ `nav-bar list item ${ unitsArr[i].id }` }><a id={`nav-bar-id${ unitsArr[i].id }`} onClick={ (e) => this.props.updateCurrentUnit(e) }>{ unitsArr[i].unit }</a></li>)
     }
 
-    console.log(unitsLinks);
-
     return (
       <div>
         <h1 id='appTitle'>CS Study Planner</h1>

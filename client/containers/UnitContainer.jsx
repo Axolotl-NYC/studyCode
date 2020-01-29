@@ -63,10 +63,9 @@ class UnitContainer extends React.Component {
   }
 
   componentDidUpdate(previousProps) {
-    console.log('compo update?', previousProps.currentFlashCards !== this.props.currentFlashCards)
-      if (previousProps.currentFlashCards === this.props.currentFlashCards) {
-        this.updateCurrentFlashCardsAndResources();
-      }
+    if (previousProps.currentFlashCards === this.props.currentFlashCards) {
+      this.updateCurrentFlashCardsAndResources();
+    }
   }
 
   render() {
@@ -92,12 +91,10 @@ class UnitContainer extends React.Component {
                   id={ this.props.currentUnitData.id.toString() }
                   addFlashCard={ this.addFlashCard }
                   reRender={ this.reRender } />
+                <Resources
+                  resources={ this.props.currentResources } />
               </div> :
               <div></div> }
-              {/*
-                            <Resources
-                resources={ this.state.resources } />
-              */}
         </div>
       </div>
     );
