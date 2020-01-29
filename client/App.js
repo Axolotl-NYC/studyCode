@@ -31,7 +31,6 @@ class App extends Component {
   }
 
   // Nav Bar functionality
-
   updateCurrentUnit(event) {
     // Updates the state with the current selection of units. Slices off the dynamically
     // generated ID from the NavBar component at the last index of the string. This ID
@@ -42,12 +41,12 @@ class App extends Component {
     this.setState({
       currentUnitIndex: currentUnitId,
       currentUnitData: currentUnitData,
+      // clears the questions array after a re-selection on the navbar
       questionsArray: [],
     });
   }
 
   // Flashcard Functionality -- Add / Delete / Flip
-
   addFlashCard() {
     // Function to add a new flashCard to our database
     const addFlashCardURL = `/units/${ this.state.currentUnitData.id.toString() }`
@@ -102,38 +101,43 @@ class App extends Component {
         .catch(err => console.log('err:', err));
   }
 
+  // keeps a running array of true/false for the card flipping. Updates in state.
   flashCardQuestionAnswers(cardLength) {
     const currFlashCardQuestionArray = this.state.currentFlashCards;
     const buildQuestionsArray = this.state.questionsArray;
 
+    // if the current array is empty, populate with true based on the fetched length of
+    // the the flashCards.
     if (!currFlashCardQuestionArray) {
       for (let i = 0; i < cardLength; i += 1) {
         buildQuestionsArray.push(true);
       }
       return buildQuestionsArray;
+      // if the questions array is empty, just populate with a new length index of true
     } else if (buildQuestionsArray.length === 0) {
         for (let i = 0; i < cardLength; i += 1) {
           buildQuestionsArray.push(true);
         }
         return buildQuestionsArray;
+      // if a card is added, this will push an additional true to the array
     } else if (currFlashCardQuestionArray.length < cardLength) {
         for (let i = currFlashCardQuestionArray.length; i < cardLength; i += 1) {
           buildQuestionsArray.push(true);
         }
         return buildQuestionsArray;
-    }
-    else if (currFlashCardQuestionArray.length > cardLength) {
-      const tempArray = [];
-      for (let i = 0; i < cardLength; i += 1) {
-        buildQuestionsArray.push(true);
+      // if a card is deleted, just populate and re-render with the new fetched length
+      // of cards
+    } else if (currFlashCardQuestionArray.length > cardLength) {
+        const tempArray = [];
+        for (let i = 0; i < cardLength; i += 1) {
+          buildQuestionsArray.push(true);
+        }
+        return tempArray;
       }
-      return tempArray;
-    }
     return buildQuestionsArray;
   }
 
-  // function to flip the flashcards value
-  // on click should change state false
+  // function to flip the flashcards value on click should change state false
   flipFlashCard(arrayId) {
     console.log('ArrayId', arrayId)
 
@@ -147,6 +151,7 @@ class App extends Component {
     this.setState({ questionsArray: currentAnswersStateArray });
   }
 
+  // passed to lower components to update state in App.js
   updateDrilledState(updateObject){
     this.setState(updateObject);
   }
