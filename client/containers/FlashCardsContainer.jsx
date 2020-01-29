@@ -3,14 +3,11 @@ import FlashCards from '../components/FlashCards.jsx'
 
 
 class FlashCardsContainer extends Component {
-
   render() {
     const flashCardsArr = [];
 
     for (let i = 0; i < this.props.flashCards.length; i+= 1) {
       const { id, unit_id, question, answer} = this.props.flashCards[i];
-
-      // flashCardsArr.push(<li>{question}</li>);
 
       flashCardsArr.push(
         <FlashCards
@@ -39,7 +36,6 @@ class FlashCardsContainer extends Component {
       </div>
     );
   }
-
 }
 
 export default FlashCardsContainer;

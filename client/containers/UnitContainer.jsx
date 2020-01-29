@@ -37,9 +37,6 @@ class UnitContainer extends React.Component {
      * conditonally render to get state
      * a bit slow need to come back and refactor/fix
      */
-    // if (this.props.currentFlashCards === null) {
-    //   return <h1>WE LOADING BABY</h1>
-    // }
 
     return (
       <div className="container">

@@ -18,6 +18,4 @@ function FlashCard (props) {
   );
 }
 
-
-
 export default FlashCard;
