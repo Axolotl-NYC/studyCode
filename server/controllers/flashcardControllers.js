@@ -1,3 +1,6 @@
+/* eslint-disable no-console */
+/* eslint-disable camelcase */
+
 const db = require('../db_models/studyModels.js');
 
 const flashcardControllers = {};
@@ -21,10 +24,7 @@ flashcardControllers.addFlashcards = (req, res, next) => {
   const dataArr = [unitId, question, answer, created_by];
   const queryString = 'INSERT INTO flashcards (unit_id, question, answer, created_by) VALUES ($1, $2, $3, $4);';
   db.query(queryString, dataArr)
-    .then((response) => {
-      // console.log('hitting ADD FLASHCARDS and this is the response', response);
-      next();
-    })
+    .then(() => next())
     .catch((error) => {
       console.log('this is an error', error);
     });
@@ -34,9 +34,9 @@ flashcardControllers.deleteFlashcards = (req, res, next) => {
   const { id } = req.body;
   const queryString = `DELETE FROM flashcards where id = ${id};`;
   db.query(queryString)
-    .then((response) => {
-      // console.log('hitting DELETE FLASHCARDS and this is response', response);
-      return next();
+    .then(() => next())
+    .catch((error) => {
+      console.log('this is an error', error);
     });
 };
 
