@@ -59,7 +59,7 @@ class App extends Component {
         answer: document.getElementById('answer').value,
       }),
     }).then(response => response.json())
-      .then((flashCardResponse) => { this.setState({ currentFlashCards: flashCardResponse }) })
+      .then((flashCardResponse) => { this.setState({ flashCardResponse }) })
       .catch(err => console.log('err:', err));
   }
 
@@ -76,7 +76,7 @@ class App extends Component {
         id: e.target.value,
       }),
       }).then(response => response.json())
-        .then((flashCardResponse) => { this.setState({ currentFlashCards: flashCardResponse }) })
+        .then((flashCardResponse) => { this.setState({ flashCardResponse }) })
         .catch(err => console.log('err:', err));
   }
 
