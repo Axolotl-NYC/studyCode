@@ -6,6 +6,8 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import './style/index.css';
 
 import MainContainer from './containers/MainContainer.jsx';
+import LoginContainer from './containers/LoginContainer.jsx';
+import SignUpContainer from './containers/SignUpContainer.jsx';
 
 // creating a router component here that will be rendered to
 class App extends Component {
@@ -190,10 +192,10 @@ class App extends Component {
           <Switch>
             <Route path="/main-container">
               <MainContainer
-                // this.state.currentUnit is a string, needs hard set to Number
-                // for the currentUnit index
+                // Navbar Props
                 units={ this.state.units }
                 updateCurrentUnit= { this.updateCurrentUnit }
+                // Unit Container Props
                 currentUnitIndex={ this.state.currentUnitIndex }
                 currentUnitData={ this.state.currentUnitData }
                 updateDrilledState={ this.updateDrilledState }
@@ -205,6 +207,12 @@ class App extends Component {
                 flashCardQuestionAnswers={ this.flashCardQuestionAnswers }
                 questionsArray={ this.state.questionsArray }
               />
+            </Route>
+            <Route path='/sign-up'>
+              <SignUpContainer />
+            </Route>
+            <Route path='/'>
+              <LoginContainer />
             </Route>
           </Switch>
         </Router>
