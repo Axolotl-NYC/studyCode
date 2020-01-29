@@ -37,15 +37,15 @@ class UnitContainer extends React.Component {
      * conditonally render to get state
      * a bit slow need to come back and refactor/fix
      */
-    if (this.props.currentFlashCards === null) {
-      return <h1>WE LOADING BABY</h1>
-    }
+    // if (this.props.currentFlashCards === null) {
+    //   return <h1>WE LOADING BABY</h1>
+    // }
 
     return (
       <div className="container">
         <h1>{ this.props.currentUnitData.unit }</h1>
         <div className="outerBox">
-            { this.props.currentFlashCards !== null ?
+            { this.props.questionsArray.length > 0 ?
               <div>
                 <Description
                   description={ this.props.currentUnitData.description }
