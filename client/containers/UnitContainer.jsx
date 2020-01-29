@@ -58,9 +58,9 @@ class UnitContainer extends React.Component {
       }).catch((error) => console.log('ERROR IN FLASHCARDS: ', error));
   }
 
-  // componentDidMount() {
-  //   this.updateCurrentFlashCardsAndResources();
-  // }
+  componentDidMount() {
+    this.updateCurrentFlashCardsAndResources();
+  }
 
   componentDidUpdate(previousProps) {
     console.log('compo update?', previousProps.currentFlashCards !== this.props.currentFlashCards)
@@ -74,7 +74,7 @@ class UnitContainer extends React.Component {
      * conditonally render to get state
      * a bit slow need to come back and refactor/fix
      */
-    if (this.props.currentUnitData === null) {
+    if (this.props.currentFlashCards === null) {
       return <h1>WE LOADING BABY</h1>
     }
 
