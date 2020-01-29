@@ -4,6 +4,7 @@ const unitsRouter = express.Router();
 
 const flashcardControllers = require('../controllers/flashcardControllers');
 const unitControllers = require('../controllers/unitControllers');
+const resourceControllers = require('../controllers/resourceControllers');
 
 
 // handles incoming request to /units endpoint
@@ -13,28 +14,41 @@ unitsRouter.get('/',
     res.status(200).json(res.locals.units);
   });
 
+// initial load of unit
 unitsRouter.get('/:unitId',
-  unitControllers.getResources,
+  resourceControllers.getResources,
   flashcardControllers.getFlashcards,
   (req, res) => {
-    res.status(200).json({ flashCards: res.locals.flashcards, resources: res.locals.resources });
+    res.status(200).json({
+      flashCards: res.locals.flashcards,
+      resources: res.locals.resources,
+    });
   });
 
+// Adding a flash card
+// return all flashcards and resources
 unitsRouter.post('/:unitId',
   flashcardControllers.addFlashcards,
+  resourceControllers.getResources,
+  flashcardControllers.getFlashcards,
   (req, res) => {
-    res.status(200).json('flashcard successfully added!');
+    res.status(200).json({
+      flashCards: res.locals.flashcards,
+      resources: res.locals.resources,
+    });
   });
 
+// Deleting a flash card
+// return all flashcards and resources
 unitsRouter.delete('/:unitId',
   flashcardControllers.deleteFlashcards,
+  resourceControllers.getResources,
+  flashcardControllers.getFlashcards,
   (req, res) => {
-    res.status(200).json('flashcard successfully deleted!');
+    res.status(200).json({
+      flashCards: res.locals.flashcards,
+      resources: res.locals.resources,
+    });
   });
-
-// unitsRouter.get('/resources/:unitId',
-//   unitControllers.getResources, (req, res) => {
-//     res.status(200).json(res.locals.resources);
-//   });
 
 module.exports = unitsRouter;
