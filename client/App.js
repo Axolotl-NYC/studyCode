@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
 
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+
 import './style/index.css';
 
 import NavBar from './components/NavBar.jsx';
@@ -185,27 +187,33 @@ class App extends Component {
 
     return (
       <section className='app-container'>
-        <NavBar
+        <Router>
+          <NavBar
           units={ this.state.units }
-          updateCurrentUnit= { this.updateCurrentUnit }
-        />
+          updateCurrentUnit= { this.updateCurrentUnit } />
         { // conditional render precluded on if a NavBar selection was made, default is null.
           // Updates on NavBar selection
           this.state.currentUnitIndex !== null ?
-          <UnitContainer
-            // this.state.currentUnit is a string, needs hard set to Number
-            // for the currentUnit index
-            currentUnitData={ this.state.currentUnitData }
-            updateDrilledState={ this.updateDrilledState }
-            currentFlashCards={ this.state.currentFlashCards }
-            currentResources={ this.state.currentResources }
-            addFlashCard={ this.addFlashCard }
-            deleteFlashCard={ this.deleteFlashCard }
-            flipFlashCard={ this.flipFlashCard }
-            flashCardQuestionAnswers={ this.flashCardQuestionAnswers }
-            questionsArray={ this.state.questionsArray } />
+          <Switch>
+            <Route path="/units">
+              <UnitContainer
+                // this.state.currentUnit is a string, needs hard set to Number
+                // for the currentUnit index
+                currentUnitData={ this.state.currentUnitData }
+                updateDrilledState={ this.updateDrilledState }
+                currentFlashCards={ this.state.currentFlashCards }
+                currentResources={ this.state.currentResources }
+                addFlashCard={ this.addFlashCard }
+                deleteFlashCard={ this.deleteFlashCard }
+                flipFlashCard={ this.flipFlashCard }
+                flashCardQuestionAnswers={ this.flashCardQuestionAnswers }
+                questionsArray={ this.state.questionsArray }
+              />
+            </Route>
+          </Switch>
           : <div></div>
         }
+        </Router>
       </section>
     )
   }
