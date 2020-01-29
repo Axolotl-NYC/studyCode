@@ -66,7 +66,7 @@ class App extends Component {
   deleteFlashCard(e) {
     /// Function to delete a flashCard in our database
     const deleteFlashCardURL = `/units/${ this.state.currentUnitData.id.toString() }`
-
+    console.log('event target', e.target);
     fetch(deleteFlashCardURL, {
       method: 'DELETE',
       headers: {
