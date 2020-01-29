@@ -75,12 +75,17 @@ class UnitContainer extends React.Component {
           <Description
             description={ this.props.currentUnitData.description }
             sub_units={ this.props.currentUnitData.sub_units } />
-          <FlashCardsContainer
-            flashCards={ this.props.currentFlashCards }
-            id={ this.props.currentUnitData.id.toString() }
-            addFlashCard={ this.addFlashCard }
-            reRender={ this.reRender } />
-            { /*
+            {
+              this.props.currentFlashCards !== null ?
+              <FlashCardsContainer
+                flashCards={ this.props.currentFlashCards }
+                id={ this.props.currentUnitData.id.toString() }
+                addFlashCard={ this.addFlashCard }
+                reRender={ this.reRender } /> :
+              <div>
+              </div>
+            }
+          { /*
           <Resources
             resources={ this.state.resources } /> */
             }

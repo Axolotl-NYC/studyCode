@@ -35,12 +35,24 @@ class App extends Component {
     const currentUnitId = Number(event.target.id.slice(event.target.id.length - 1)) - 1;
     const currentUnitData = this.state.units[currentUnitId];
 
-    
-
     this.setState({
       currentUnitIndex: currentUnitId,
       currentUnitData: currentUnitData,
     });
+  }
+
+  updateCurrentFlashCardsAndResources() {
+    const unitId = this.state.currentUnitData.id.toString();
+    const flashCardsURL = `/units/${unitId}`;
+
+    fetch(flashCardsURL)
+      .then((response) => response.json())
+      .then((data) => {
+        this.setState({
+            currentFlashCards: data.flashCards,
+            currentResources: data.resources,
+          })
+      }).catch((error) => console.log('ERROR IN FLASHCARDS: ', error));
   }
 
   updateDrilledState(updateObject){
@@ -62,8 +74,8 @@ class App extends Component {
   }
 
   // componentDidUpdate() {
-  //   if (this.state.currentUnit !== null) {
-
+  //   if (this.state.currentUnitData !== null) {
+  //     this.updateCurrentFlashCardsAndResources()
   //   }
   // }
 
