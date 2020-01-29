@@ -69,6 +69,7 @@ class UnitContainer extends React.Component {
                   id={ this.props.currentUnitData.id.toString() }
                   addFlashCard={ this.props.addFlashCard }
                   flipFlashCard={ this.props.flipFlashCard }
+                  question={ this.props.question }
                   />
                 <Resources
                   resources={ this.props.currentResources } />

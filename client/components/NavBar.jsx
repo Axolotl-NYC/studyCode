@@ -6,7 +6,7 @@ class NavBar extends Component {
   render() {
     const unitsArr = this.props.units;
     /*
-     * Modularize adding the units 
+     * Modularize adding the units
      */
 
     const unitsLinks = [];

@@ -7,8 +7,8 @@ class FlashCard extends Component {
     this.state = {
       question: true,
     }
-    this.deleteFlashCard = this.deleteFlashCard.bind(this);
-    this.flipFlashCard = this.flipFlashCard.bind(this);
+    // this.deleteFlashCard = this.deleteFlashCard.bind(this);
+    // this.flipFlashCard = this.flipFlashCard.bind(this);
   }
 
   // deleteFlashCard(e) {
@@ -54,9 +54,9 @@ class FlashCard extends Component {
 
     // also only display cards from the stock cards and the ones created by the user
 
-    if (this.state.question) {
+    if (this.props.question) {
       return (
-        <div className="flashCard_question" onClick={this.flipFlashCard}>
+        <div className="flashCard_question" onClick={this.props.flipFlashCard}>
           <a id='questionP'>{this.props.question}</a>
           <button onClick={this.props.deleteFlashCard} value={this.props.id} className="deleteCard" type="button">x</button>
         </div>

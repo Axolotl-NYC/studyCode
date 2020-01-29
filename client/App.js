@@ -18,7 +18,7 @@ class App extends Component {
       currentUnitIndex: null,
       currentFlashCards: null,
       currentResources: null,
-      question: null,
+      question: true,
     }
 
     this.updateCurrentUnit = this.updateCurrentUnit.bind(this);
@@ -144,7 +144,8 @@ class App extends Component {
             currentResources={ this.state.currentResources }
             addFlashCard={ this.addFlashCard }
             deleteFlashCard={ this.deleteFlashCard }
-            flipFlashCard={ this.flipFlashCard } />
+            flipFlashCard={ this.flipFlashCard }
+            question={ this.state.question } />
           : <div></div>
         }
       </section>

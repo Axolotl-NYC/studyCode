@@ -21,6 +21,7 @@ class FlashCardsContainer extends Component {
           unit_id={ unit_id }
           deleteFlashCard={ this.props.deleteFlashCard }
           flipFlashCard={ this.props.flipFlashCard }
+          question={ this.props.question }
         />)
     }
 
