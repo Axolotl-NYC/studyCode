@@ -22,28 +22,6 @@ class UnitContainer extends React.Component {
   //   .catch(err => console.log('ERROR IN FLASHCARDS:', err));
   // }
 
-  addFlashCard() {
-    /*
-      Function to add a new flashCard to our database
-    */
-    const addFlashCardURL = `/units/${ this.props.currentUnitData.id.toString() }`
-
-    fetch(addFlashCardURL, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        question: document.getElementById('question').value,
-        answer: document.getElementById('answer').value,
-      }),
-    }
-    )
-    .then(res => res.json())
-    .then(() => this.reRender())
-    .catch(err => console.log('err:', err));
-  }
-
   updateCurrentFlashCardsAndResources() {
     const unitId = this.props.currentUnitData.id.toString();
     const flashCardsURL = `/units/${unitId}`;
@@ -89,8 +67,9 @@ class UnitContainer extends React.Component {
                 <FlashCardsContainer
                   flashCards={ this.props.currentFlashCards }
                   id={ this.props.currentUnitData.id.toString() }
-                  addFlashCard={ this.addFlashCard }
-                  reRender={ this.reRender } />
+                  addFlashCard={ this.props.addFlashCard }
+                  flipFlashCard={ this.props.flipFlashCard }
+                  />
                 <Resources
                   resources={ this.props.currentResources } />
               </div> :

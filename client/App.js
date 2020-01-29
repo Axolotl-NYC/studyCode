@@ -18,11 +18,17 @@ class App extends Component {
       currentUnitIndex: null,
       currentFlashCards: null,
       currentResources: null,
+      question: null,
     }
 
     this.updateCurrentUnit = this.updateCurrentUnit.bind(this);
-    this.updateDrilledState = this.updateDrilledState.bind(this)
+    this.updateDrilledState = this.updateDrilledState.bind(this);
+    this.addFlashCard = this.addFlashCard.bind(this);
+    this.deleteFlashCard = this.deleteFlashCard.bind(this);
+    this.flipFlashCard = this.flipFlashCard.bind(this);
   }
+
+  // Nav Bar functionality
 
   updateCurrentUnit(event) {
     // Updates the state with the current selection of units. Slices off the dynamically
@@ -35,6 +41,58 @@ class App extends Component {
       currentUnitIndex: currentUnitId,
       currentUnitData: currentUnitData,
     });
+  }
+
+  // Flashcard Functionality -- Add / Delete / Flip
+
+  addFlashCard() {
+    // Function to add a new flashCard to our database
+    const addFlashCardURL = `/units/${ this.state.currentUnitData.id.toString() }`
+
+    fetch(addFlashCardURL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        question: document.getElementById('question').value,
+        answer: document.getElementById('answer').value,
+      }),
+    }).then(response => response.json())
+      .then((flashCardResponse) => { this.setState({ currentFlashCards: flashCardResponse }) })
+      .catch(err => console.log('err:', err));
+  }
+
+  deleteFlashCard(e) {
+    /// Function to delete a flashCard in our database
+    const deleteFlashCardURL = `/units/${ this.state.currentUnitData.id.toString() }`
+
+    fetch(deleteFlashCardURL, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        id: e.target.value,
+      }),
+      }).then(response => response.json())
+        .then((flashCardResponse) => { this.setState({ currentFlashCards: flashCardResponse }) })
+        .catch(err => console.log('err:', err));
+  }
+
+  // function to flip the flashcards value
+  // on click should change state false
+  flipFlashCard() {
+    if (this.state.question) {
+      this.setState({
+        question: false,
+      });
+    }
+    else {
+      this.setState({
+        question: true,
+      })
+    }
   }
 
   updateDrilledState(updateObject){
@@ -84,7 +142,9 @@ class App extends Component {
             updateDrilledState={ this.updateDrilledState }
             currentFlashCards={ this.state.currentFlashCards }
             currentResources={ this.state.currentResources }
-          />
+            addFlashCard={ this.addFlashCard }
+            deleteFlashCard={ this.deleteFlashCard }
+            flipFlashCard={ this.flipFlashCard } />
           : <div></div>
         }
       </section>

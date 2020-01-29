@@ -19,7 +19,8 @@ class FlashCardsContainer extends Component {
           question={ question }
           answer={ answer }
           unit_id={ unit_id }
-          reRender={ this.props.reRender }
+          deleteFlashCard={ this.props.deleteFlashCard }
+          flipFlashCard={ this.props.flipFlashCard }
         />)
     }
 
