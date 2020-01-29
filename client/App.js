@@ -5,8 +5,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import './style/index.css';
 
-import NavBar from './components/NavBar.jsx';
-import UnitContainer from './containers/UnitContainer.jsx';
+import MainContainer from './containers/MainContainer.jsx';
 
 // creating a router component here that will be rendered to
 class App extends Component {
@@ -188,17 +187,14 @@ class App extends Component {
     return (
       <section className='app-container'>
         <Router>
-          <NavBar
-          units={ this.state.units }
-          updateCurrentUnit= { this.updateCurrentUnit } />
-        { // conditional render precluded on if a NavBar selection was made, default is null.
-          // Updates on NavBar selection
-          this.state.currentUnitIndex !== null ?
           <Switch>
-            <Route path="/units">
-              <UnitContainer
+            <Route path="/main-container">
+              <MainContainer
                 // this.state.currentUnit is a string, needs hard set to Number
                 // for the currentUnit index
+                units={ this.state.units }
+                updateCurrentUnit= { this.updateCurrentUnit }
+                currentUnitIndex={ this.state.currentUnitIndex }
                 currentUnitData={ this.state.currentUnitData }
                 updateDrilledState={ this.updateDrilledState }
                 currentFlashCards={ this.state.currentFlashCards }
@@ -211,8 +207,6 @@ class App extends Component {
               />
             </Route>
           </Switch>
-          : <div></div>
-        }
         </Router>
       </section>
     )
