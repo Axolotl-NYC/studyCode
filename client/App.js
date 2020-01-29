@@ -55,12 +55,6 @@ class App extends Component {
       .catch(err => console.log('ERROR:', err));
   }
 
-  // componentDidUpdate() {
-  //   if (this.state.currentUnitData !== null) {
-  //     this.updateCurrentFlashCardsAndResources()
-  //   }
-  // }
-
   render() {
 
     if (!this.state.postDidMount) {

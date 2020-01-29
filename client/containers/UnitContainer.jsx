@@ -26,7 +26,7 @@ class UnitContainer extends React.Component {
     /*
       Function to add a new flashCard to our database
     */
-    const addFlashCardURL = `/units/${this.props.id}`
+    const addFlashCardURL = `/units/${ this.props.currentUnitData.id.toString() }`
 
     fetch(addFlashCardURL, {
       method: 'POST',
