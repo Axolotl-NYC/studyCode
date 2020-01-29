@@ -19,6 +19,7 @@ class App extends Component {
       currentFlashCards: null,
       currentResources: null,
       question: true,
+      questionsArray: [],
     }
 
     this.updateCurrentUnit = this.updateCurrentUnit.bind(this);
@@ -26,6 +27,7 @@ class App extends Component {
     this.addFlashCard = this.addFlashCard.bind(this);
     this.deleteFlashCard = this.deleteFlashCard.bind(this);
     this.flipFlashCard = this.flipFlashCard.bind(this);
+    this.flashCardQuestionAnswers = this.flashCardQuestionAnswers.bind(this);
   }
 
   // Nav Bar functionality
@@ -59,14 +61,24 @@ class App extends Component {
         answer: document.getElementById('answer').value,
       }),
     }).then(response => response.json())
-      .then((flashCardResponse) => { this.setState({ flashCardResponse }) })
+      .then((flashCardResponse) => {
+        const { flashCards, resources } = flashCardResponse;
+        console.log('currentFlashCards', flashCards )
+        const questionAnswerArray = this.flashCardQuestionAnswers(flashCards.length);
+
+        this.setState({
+          currentFlashCards: flashCards,
+          currentResources: resources,
+          questionsArray: questionAnswerArray,
+        })
+      })
       .catch(err => console.log('err:', err));
   }
 
   deleteFlashCard(e) {
     /// Function to delete a flashCard in our database
     const deleteFlashCardURL = `/units/${ this.state.currentUnitData.id.toString() }`
-    console.log('event target', e.target);
+
     fetch(deleteFlashCardURL, {
       method: 'DELETE',
       headers: {
@@ -76,8 +88,25 @@ class App extends Component {
         id: e.target.value,
       }),
       }).then(response => response.json())
-        .then((flashCardResponse) => { this.setState({ flashCardResponse }) })
+      .then((flashCardResponse) => {
+        const { flashCards, resources } = flashCardResponse;
+        const questionAnswerArray = this.flashCardQuestionAnswers(flashCards.length);
+
+        this.setState({
+          currentFlashCards: flashCards,
+          currentResources: resources,
+          questionsArray: questionAnswerArray,
+        })
+      })
         .catch(err => console.log('err:', err));
+  }
+
+  flashCardQuestionAnswers(cardLength) {
+    const returnedArray = [];
+    for (let i = 0; i < cardLength; i += 1) {
+      returnedArray.push(true);
+    }
+    return returnedArray;
   }
 
   // function to flip the flashcards value
@@ -122,7 +151,7 @@ class App extends Component {
     /**
      * Need to find a better way of modularizing each of the renders
      * Each of the specific pages are the same
-     * Breaking the DRY principle 
+     * Breaking the DRY principle
      * Would need to make a Page component that would be a route path
      */
 
@@ -145,6 +174,7 @@ class App extends Component {
             addFlashCard={ this.addFlashCard }
             deleteFlashCard={ this.deleteFlashCard }
             flipFlashCard={ this.flipFlashCard }
+            flashCardQuestionAnswers={ this.flashCardQuestionAnswers }
             question={ this.state.question } />
           : <div></div>
         }

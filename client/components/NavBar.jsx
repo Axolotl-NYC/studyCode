@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-// class to render our main app 
+// class to render our main app
 class NavBar extends Component {
 
   render() {

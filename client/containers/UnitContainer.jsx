@@ -29,7 +29,9 @@ class UnitContainer extends React.Component {
     fetch(flashCardsURL)
       .then((response) => response.json())
       .then((data) => {
+        const questionAnswerArray = this.props.flashCardQuestionAnswers(data.flashCards.length)
         this.props.updateDrilledState({
+            questionsArray: questionAnswerArray,
             currentFlashCards: data.flashCards,
             currentResources: data.resources,
           })
