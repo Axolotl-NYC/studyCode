@@ -11,6 +11,7 @@ class FlashCard extends Component {
 
   render() {
     // we are passed in id, unit_id, question, answer
+    console.log(`flash card ${this.props.arrayId} props`, this.props)
 
     // need a deleteCard function that is conditonal on only being able to delete if created_by is the current user
 

@@ -5,23 +5,6 @@ import Resources from '../components/Resources.jsx';
 
 class UnitContainer extends React.Component {
 
-  // inelegant way of reRendering the page after a change has been made
-  // reRender() {
-  //   const unitId = this.props.id;
-
-  //   const flashCardsURL = `/units/${unitId}`;
-
-  //   fetch(flashCardsURL)
-  //   .then(res => res.json())
-  //   .then(data => {
-  //     this.setState({
-  //       flashCards: data,
-  //       didLoad: true,
-  //     }, () => console.log('STATE AFTER SETTING STATE',this.state));
-  //   })
-  //   .catch(err => console.log('ERROR IN FLASHCARDS:', err));
-  // }
-
   updateCurrentFlashCardsAndResources() {
     const unitId = this.props.currentUnitData.id.toString();
     const flashCardsURL = `/units/${unitId}`;

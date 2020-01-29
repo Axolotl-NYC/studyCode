@@ -42,6 +42,7 @@ class App extends Component {
     this.setState({
       currentUnitIndex: currentUnitId,
       currentUnitData: currentUnitData,
+      questionsArray: [],
     });
   }
 
@@ -105,15 +106,29 @@ class App extends Component {
     const currFlashCardQuestionArray = this.state.currentFlashCards;
     const buildQuestionsArray = this.state.questionsArray;
 
-    console.log('currFlashCardQuestionArray', currFlashCardQuestionArray)
     if (!currFlashCardQuestionArray) {
       for (let i = 0; i < cardLength; i += 1) {
         buildQuestionsArray.push(true);
       }
+      return buildQuestionsArray;
+    } else if (buildQuestionsArray.length === 0) {
+        for (let i = 0; i < cardLength; i += 1) {
+          buildQuestionsArray.push(true);
+        }
+        return buildQuestionsArray;
+    } else if (currFlashCardQuestionArray.length < cardLength) {
+        for (let i = currFlashCardQuestionArray.length; i < cardLength; i += 1) {
+          buildQuestionsArray.push(true);
+        }
+        return buildQuestionsArray;
     }
-    // else if (currFlashCardQuestionArray.length === cardLength) return currFlashCardQuestionArray;
-    // else if (currFlashCardQuestionArray.length < cardLength) return currFlashCardQuestionArray.push(true);
-
+    else if (currFlashCardQuestionArray.length > cardLength) {
+      const tempArray = [];
+      for (let i = 0; i < cardLength; i += 1) {
+        buildQuestionsArray.push(true);
+      }
+      return tempArray;
+    }
     return buildQuestionsArray;
   }
 
@@ -121,7 +136,10 @@ class App extends Component {
   // on click should change state false
   flipFlashCard(arrayId) {
     console.log('ArrayId', arrayId)
+
     const currentAnswersStateArray = this.state.questionsArray;
+
+    console.log('currentAnswersStateArray', currentAnswersStateArray)
 
     if (currentAnswersStateArray[arrayId]) currentAnswersStateArray[arrayId] = false;
     else currentAnswersStateArray[arrayId] = true;
