@@ -102,26 +102,31 @@ class App extends Component {
   }
 
   flashCardQuestionAnswers(cardLength) {
-    const returnedArray = [];
-    for (let i = 0; i < cardLength; i += 1) {
-      returnedArray.push(true);
+    const currFlashCardQuestionArray = this.state.currentFlashCards;
+    const buildQuestionsArray = this.state.questionsArray;
+
+    console.log('currFlashCardQuestionArray', currFlashCardQuestionArray)
+    if (!currFlashCardQuestionArray) {
+      for (let i = 0; i < cardLength; i += 1) {
+        buildQuestionsArray.push(true);
+      }
     }
-    return returnedArray;
+    // else if (currFlashCardQuestionArray.length === cardLength) return currFlashCardQuestionArray;
+    // else if (currFlashCardQuestionArray.length < cardLength) return currFlashCardQuestionArray.push(true);
+
+    return buildQuestionsArray;
   }
 
   // function to flip the flashcards value
   // on click should change state false
-  flipFlashCard() {
-    if (this.state.question) {
-      this.setState({
-        question: false,
-      });
-    }
-    else {
-      this.setState({
-        question: true,
-      })
-    }
+  flipFlashCard(arrayId) {
+    console.log('ArrayId', arrayId)
+    const currentAnswersStateArray = this.state.questionsArray;
+
+    if (currentAnswersStateArray[arrayId]) currentAnswersStateArray[arrayId] = false;
+    else currentAnswersStateArray[arrayId] = true;
+
+    this.setState({ questionsArray: currentAnswersStateArray });
   }
 
   updateDrilledState(updateObject){
@@ -175,7 +180,7 @@ class App extends Component {
             deleteFlashCard={ this.deleteFlashCard }
             flipFlashCard={ this.flipFlashCard }
             flashCardQuestionAnswers={ this.flashCardQuestionAnswers }
-            question={ this.state.question } />
+            questionsArray={ this.state.questionsArray } />
           : <div></div>
         }
       </section>

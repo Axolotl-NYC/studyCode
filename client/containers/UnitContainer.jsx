@@ -29,13 +29,14 @@ class UnitContainer extends React.Component {
     fetch(flashCardsURL)
       .then((response) => response.json())
       .then((data) => {
+        // console.log('flashCard Data', data.flashCards.length)
         const questionAnswerArray = this.props.flashCardQuestionAnswers(data.flashCards.length)
         this.props.updateDrilledState({
             questionsArray: questionAnswerArray,
             currentFlashCards: data.flashCards,
             currentResources: data.resources,
           })
-      }).catch((error) => console.log('ERROR IN FLASHCARDS: ', error));
+      }).catch((error) => console.log('ERROR GET FLASHCARDS: ', error));
   }
 
   componentDidMount() {
@@ -72,7 +73,7 @@ class UnitContainer extends React.Component {
                   addFlashCard={ this.props.addFlashCard }
                   flipFlashCard={ this.props.flipFlashCard }
                   deleteFlashCard={ this.props.deleteFlashCard }
-                  question={ this.props.question }
+                  questionsArray={ this.props.questionsArray }
                   />
                 <Resources
                   resources={ this.props.currentResources } />

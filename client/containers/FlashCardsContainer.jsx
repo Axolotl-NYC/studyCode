@@ -15,13 +15,14 @@ class FlashCardsContainer extends Component {
       flashCardsArr.push(
         <FlashCards
           id={ id }
+          arrayId={ i }
           key={ `flash-card-container${ i }` }
           question={ question }
           answer={ answer }
           unit_id={ unit_id }
           deleteFlashCard={ this.props.deleteFlashCard }
           flipFlashCard={ this.props.flipFlashCard }
-          question={ this.props.question }
+          questionAnswered={ this.props.questionsArray[i] }
         />)
     }
 
