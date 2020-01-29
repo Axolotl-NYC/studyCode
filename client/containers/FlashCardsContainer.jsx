@@ -12,8 +12,15 @@ class FlashCardsContainer extends Component {
 
       // flashCardsArr.push(<li>{question}</li>);
 
-      flashCardsArr.push(<FlashCards id={id} question={question} answer={answer} unit_id={unit_id} reRender={this.props.reRender}/>)
-
+      flashCardsArr.push(
+        <FlashCards
+          id={ id }
+          key={ `flash-card-container${ i }` }
+          question={ question }
+          answer={ answer }
+          unit_id={ unit_id }
+          reRender={ this.props.reRender }
+        />)
     }
 
     return (
@@ -21,7 +28,7 @@ class FlashCardsContainer extends Component {
         <h4>Flashcards</h4>
 
         <div className="flashCardList">
-          {flashCardsArr}
+          { flashCardsArr }
         </div>
         <input type="text" placeholder="question" id="question" ></input>
         <input type="text" placeholder="answer" id="answer"></input>

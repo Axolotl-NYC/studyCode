@@ -4,41 +4,29 @@ import Description from '../components/Description.jsx';
 import Resources from '../components/Resources.jsx';
 
 class UnitContainer extends React.Component {
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      flashCards: [],
-      resources: [],
-      didLoad: false,
-    }
-
-    this.addFlashCard = this.addFlashCard.bind(this);
-    this.reRender = this.reRender.bind(this);
-  }
 
   // inelegant way of reRendering the page after a change has been made
-  reRender() {
-    const unitId = this.props.id;
+  // reRender() {
+  //   const unitId = this.props.id;
 
-    const flashCardsURL = `/units/${unitId}`;
+  //   const flashCardsURL = `/units/${unitId}`;
 
-    fetch(flashCardsURL)
-    .then(res => res.json())
-    .then(data => {
-      this.setState({
-        flashCards: data,
-        didLoad: true,
-      }, () => console.log('STATE AFTER SETTING STATE',this.state));
-    })
-    .catch(err => console.log('ERROR IN FLASHCARDS:', err));
-  }
+  //   fetch(flashCardsURL)
+  //   .then(res => res.json())
+  //   .then(data => {
+  //     this.setState({
+  //       flashCards: data,
+  //       didLoad: true,
+  //     }, () => console.log('STATE AFTER SETTING STATE',this.state));
+  //   })
+  //   .catch(err => console.log('ERROR IN FLASHCARDS:', err));
+  // }
 
   addFlashCard() {
     /*
       Function to add a new flashCard to our database
     */
-    const addFlashCardURL = `/units/${this.props.id}`
+    const addFlashCardURL = `/units/${ this.props.currentUnitData.id.toString() }`
 
     fetch(addFlashCardURL, {
       method: 'POST',
@@ -56,54 +44,57 @@ class UnitContainer extends React.Component {
     .catch(err => console.log('err:', err));
   }
 
-  componentDidMount() {
-    /*
-     * Each page i.e. (OOP, GIT...) will have a unitContainer component.
-     * Within each respective unit container component, we want to fetch flashCards and resources.
-     */
-    const unitId = this.props.id;
-
+  updateCurrentFlashCardsAndResources() {
+    const unitId = this.props.currentUnitData.id.toString();
     const flashCardsURL = `/units/${unitId}`;
 
     fetch(flashCardsURL)
-    .then(res => res.json())
-    .then(data => {
-      this.setState({
-        flashCards: data,
-        didLoad: true,
-      }
-      );
-    })
-    .catch(err => console.log('ERROR IN FLASHCARDS:', err));
+      .then((response) => response.json())
+      .then((data) => {
+        this.props.updateDrilledState({
+            currentFlashCards: data.flashCards,
+            currentResources: data.resources,
+          })
+      }).catch((error) => console.log('ERROR IN FLASHCARDS: ', error));
+  }
 
-    const resourcesURL = `/resources/${unitId}`
+  componentDidMount() {
+    this.updateCurrentFlashCardsAndResources();
+  }
 
-    fetch(resourcesURL)
-    .then(res => res.json())
-    .then(data => {
-      this.setState({
-        resources: data,
-      })
-    })
-    .catch(err => console.log('ERROR IN RESOURCES', err));
+  componentDidUpdate(previousProps) {
+    if (previousProps.currentFlashCards === this.props.currentFlashCards) {
+      this.updateCurrentFlashCardsAndResources();
+    }
   }
 
   render() {
     /***
-     * conditonally render to get state 
+     * conditonally render to get state
      * a bit slow need to come back and refactor/fix
      */
-    if (!this.state.didLoad) {
+    if (this.props.currentFlashCards === null) {
       return <h1>WE LOADING BABY</h1>
     }
 
     return (
       <div className="container">
+        <h1>{ this.props.currentUnitData.unit }</h1>
         <div className="outerBox">
-          <Description description={this.props.description}
-          sub_units={this.props.sub_units} />
-          <FlashCardsContainer flashCards={this.state.flashCards} id={this.props.id} addFlashCard={this.addFlashCard} reRender={this.reRender}/>
-          <Resources resources={this.state.resources} />
+            { this.props.currentFlashCards !== null ?
+              <div>
+                <Description
+                  description={ this.props.currentUnitData.description }
+                  sub_units={ this.props.currentUnitData.sub_units } />
+                <FlashCardsContainer
+                  flashCards={ this.props.currentFlashCards }
+                  id={ this.props.currentUnitData.id.toString() }
+                  addFlashCard={ this.addFlashCard }
+                  reRender={ this.reRender } />
+                <Resources
+                  resources={ this.props.currentResources } />
+              </div> :
+              <div></div> }
         </div>
       </div>
     );
