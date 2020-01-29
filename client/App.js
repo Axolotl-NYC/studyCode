@@ -35,6 +35,8 @@ class App extends Component {
     const currentUnitId = Number(event.target.id.slice(event.target.id.length - 1)) - 1;
     const currentUnitData = this.state.units[currentUnitId];
 
+    
+
     this.setState({
       currentUnitIndex: currentUnitId,
       currentUnitData: currentUnitData,
@@ -59,11 +61,11 @@ class App extends Component {
       .catch(err => console.log('ERROR:', err));
   }
 
-  componentDidUpdate() {
-    if (this.state.currentUnit !== null) {
+  // componentDidUpdate() {
+  //   if (this.state.currentUnit !== null) {
 
-    }
-  }
+  //   }
+  // }
 
   render() {
 
@@ -79,23 +81,6 @@ class App extends Component {
      */
 
     return (
-      // <Router>
-      //   <div>
-      //     <Route exact path="/" render={() => <div style={{ backgroundImage: "url(https://i.ytimg.com/vi/hToEL-nNtyM/maxresdefault.jpg)", backgroundSize: "100% 100%", height: '100vh', position: 'absolute', zIndex: -1, top: 0, bottom: 0, left: 0, right: 0 }} />} />  
-      //     <Route path="/" render={() => <NavBar units={this.state.units} />} />
-      //     <Route path="/OOP"
-      //       render={() => <OOP state={this.state.units[0]} />} />
-      //     <Route path="/DATA STRUCTURES"
-      //       render={() => <DATASTRUCTURES state={this.state.units[1]} />}
-      //     />
-      //     <Route path="/GIT and GITHUB"
-      //       render={() => <GIT state={this.state.units[2]} />}
-      //     />
-      //     <Route path="/ALGORITHMS"
-      //       render={() => <ALGORITHMS state={this.state.units[3]} />}
-      //     />
-      //   </div>
-      // </Router>
       <section className='app-container'>
         <NavBar
           units={ this.state.units }
