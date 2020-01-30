@@ -64,6 +64,7 @@ class UnitContainer extends React.Component {
                   />
                 <Resources
                   resources={ this.props.currentResources } />
+                <button onClick={() => this.props.deleteUnit(this.props.currentUnitData.id.toString())} className="deleteUnit" type="button">Delete Unit</button>
               </div>
               :
             <div></div> }

@@ -32,6 +32,7 @@ class App extends Component {
     this.flipFlashCard = this.flipFlashCard.bind(this);
     this.flashCardQuestionAnswers = this.flashCardQuestionAnswers.bind(this);
     this.addUnit = this.addUnit.bind(this);
+    this.deleteUnit = this.deleteUnit.bind(this);
   }
 
   // Nav Bar functionality
@@ -154,7 +155,7 @@ class App extends Component {
     this.setState({ questionsArray: currentAnswersStateArray });
   }
 
-  // functions to add a unit
+  // functions to add and delete a unit
   addUnit() {
     // Function to add a new flashCard to our database
     const addUnitURL = `/units/add-unit`
@@ -186,6 +187,30 @@ class App extends Component {
         })
       })
       .catch(err => console.log('error in New Unit Response:', err));
+  }
+
+  deleteUnit(cardId) {
+    /// Function to delete a flashCard in our database
+    const deleteUnitURL = `/units/delete-unit`
+
+    fetch(deleteUnitURL, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        id: cardId,
+      }),
+      }).then(response => response.json())
+        .then((deleteUnitResponse) => {
+        console.log('delete unit response', deleteUnitResponse);
+
+        this.setState({
+          units: deleteUnitResponse,
+          postDidMount: true,
+        })
+      })
+        .catch(err => console.log('error in deleteUnit:', err));
   }
   // passed to lower components to update state in App.js
   updateDrilledState(updateObject){
@@ -241,6 +266,7 @@ class App extends Component {
                 questionsArray={ this.state.questionsArray }
                 // Add Unit Props
                 addUnit={ this.addUnit }
+                deleteUnit={ this.deleteUnit }
               />
             </Route>
             <Route path='/sign-up'>

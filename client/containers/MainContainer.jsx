@@ -34,6 +34,7 @@ function MainContainer (props) {
               flipFlashCard={ props.flipFlashCard }
               flashCardQuestionAnswers={ props.flashCardQuestionAnswers }
               questionsArray={ props.questionsArray }
+              deleteUnit={ props.deleteUnit }
             />
               : <div></div>
             }
