@@ -150,6 +150,29 @@ class App extends Component {
     this.setState({ questionsArray: currentAnswersStateArray });
   }
 
+  // functions to add a unit
+  addUnit() {
+    // Function to add a new flashCard to our database
+    const addUnitURL = `/units/${ this.state.currentUnitData.id.toString() }`
+
+    fetch(addUnitURL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        unit: document.getElementById('unit-name').value,
+        description: document.getElementById('unit-description').value,
+        sub_units: document.getElementById('sub-units').value,
+      }),
+    }).then(response => response.json())
+      .then((newUnitResponse) => {
+        this.setState({
+          units: newUnitResponse,
+        })
+      })
+      .catch(err => console.log('error in New Unit Response:', err));
+  }
   // passed to lower components to update state in App.js
   updateDrilledState(updateObject){
     this.setState(updateObject);
@@ -202,6 +225,8 @@ class App extends Component {
                 flipFlashCard={ this.flipFlashCard }
                 flashCardQuestionAnswers={ this.flashCardQuestionAnswers }
                 questionsArray={ this.state.questionsArray }
+                // Add Unit Props
+                addUnit={ this.addUnit }
               />
             </Route>
             <Route path='/sign-up'>
