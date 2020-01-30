@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
 
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+
 import './style/index.css';
 
-import NavBar from './components/NavBar.jsx';
-import UnitContainer from './containers/UnitContainer.jsx';
+import MainContainer from './containers/MainContainer.jsx';
+import LoginContainer from './containers/LoginContainer.jsx';
+import SignUpContainer from './containers/SignUpContainer.jsx';
 
 // creating a router component here that will be rendered to
 class App extends Component {
@@ -139,11 +142,7 @@ class App extends Component {
 
   // function to flip the flashcards value on click should change state false
   flipFlashCard(arrayId) {
-    console.log('ArrayId', arrayId)
-
     const currentAnswersStateArray = this.state.questionsArray;
-
-    console.log('currentAnswersStateArray', currentAnswersStateArray)
 
     if (currentAnswersStateArray[arrayId]) currentAnswersStateArray[arrayId] = false;
     else currentAnswersStateArray[arrayId] = true;
@@ -151,6 +150,29 @@ class App extends Component {
     this.setState({ questionsArray: currentAnswersStateArray });
   }
 
+  // functions to add a unit
+  addUnit() {
+    // Function to add a new flashCard to our database
+    const addUnitURL = `/units/${ this.state.currentUnitData.id.toString() }`
+
+    fetch(addUnitURL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        unit: document.getElementById('unit-name').value,
+        description: document.getElementById('unit-description').value,
+        sub_units: document.getElementById('sub-units').value,
+      }),
+    }).then(response => response.json())
+      .then((newUnitResponse) => {
+        this.setState({
+          units: newUnitResponse,
+        })
+      })
+      .catch(err => console.log('error in New Unit Response:', err));
+  }
   // passed to lower components to update state in App.js
   updateDrilledState(updateObject){
     this.setState(updateObject);
@@ -185,27 +207,36 @@ class App extends Component {
 
     return (
       <section className='app-container'>
-        <NavBar
-          units={ this.state.units }
-          updateCurrentUnit= { this.updateCurrentUnit }
-        />
-        { // conditional render precluded on if a NavBar selection was made, default is null.
-          // Updates on NavBar selection
-          this.state.currentUnitIndex !== null ?
-          <UnitContainer
-            // this.state.currentUnit is a string, needs hard set to Number
-            // for the currentUnit index
-            currentUnitData={ this.state.currentUnitData }
-            updateDrilledState={ this.updateDrilledState }
-            currentFlashCards={ this.state.currentFlashCards }
-            currentResources={ this.state.currentResources }
-            addFlashCard={ this.addFlashCard }
-            deleteFlashCard={ this.deleteFlashCard }
-            flipFlashCard={ this.flipFlashCard }
-            flashCardQuestionAnswers={ this.flashCardQuestionAnswers }
-            questionsArray={ this.state.questionsArray } />
-          : <div></div>
-        }
+        <Router>
+          <Switch>
+            <Route path="/main-container">
+              <MainContainer
+                // Navbar Props
+                units={ this.state.units }
+                updateCurrentUnit= { this.updateCurrentUnit }
+                // Unit Container Props
+                currentUnitIndex={ this.state.currentUnitIndex }
+                currentUnitData={ this.state.currentUnitData }
+                updateDrilledState={ this.updateDrilledState }
+                currentFlashCards={ this.state.currentFlashCards }
+                currentResources={ this.state.currentResources }
+                addFlashCard={ this.addFlashCard }
+                deleteFlashCard={ this.deleteFlashCard }
+                flipFlashCard={ this.flipFlashCard }
+                flashCardQuestionAnswers={ this.flashCardQuestionAnswers }
+                questionsArray={ this.state.questionsArray }
+                // Add Unit Props
+                addUnit={ this.addUnit }
+              />
+            </Route>
+            <Route path='/sign-up'>
+              <SignUpContainer />
+            </Route>
+            <Route path='/'>
+              <LoginContainer />
+            </Route>
+          </Switch>
+        </Router>
       </section>
     )
   }
