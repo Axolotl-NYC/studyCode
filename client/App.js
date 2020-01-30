@@ -38,8 +38,13 @@ class App extends Component {
     // Updates the state with the current selection of units. Slices off the dynamically
     // generated ID from the NavBar component at the last index of the string. This ID
     // will be used to render the info comps below our nav based on selection -mp
-    const currentUnitId = Number(event.target.id.slice(event.target.id.length - 1)) - 1;
+    console.log('eventTarget', event.target.id)
+    let currentUnitId = event.target.id.split(' ');
+    currentUnitId = Number(currentUnitId[currentUnitId.length - 1]);
+
     const currentUnitData = this.state.units[currentUnitId];
+
+    console.log('current unit id', currentUnitId);
 
     this.setState({
       currentUnitIndex: currentUnitId,
@@ -153,7 +158,7 @@ class App extends Component {
   // functions to add a unit
   addUnit() {
     // Function to add a new flashCard to our database
-    const addUnitURL = `/units/${ this.state.currentUnitData.id.toString() }`
+    const addUnitURL = `/units/add-unit`
 
     fetch(addUnitURL, {
       method: 'POST',
