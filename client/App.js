@@ -205,8 +205,13 @@ class App extends Component {
         .then((deleteUnitResponse) => {
         console.log('delete unit response', deleteUnitResponse);
 
+        const redirectUnit = this.state.units[deleteUnitResponse.length - 1];
+
+        console.log('redirectUnit', redirectUnit)
+
         this.setState({
           units: deleteUnitResponse,
+          currentUnitData: redirectUnit,
           postDidMount: true,
         })
       })
