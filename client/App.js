@@ -31,6 +31,7 @@ class App extends Component {
     this.deleteFlashCard = this.deleteFlashCard.bind(this);
     this.flipFlashCard = this.flipFlashCard.bind(this);
     this.flashCardQuestionAnswers = this.flashCardQuestionAnswers.bind(this);
+    this.addUnit = this.addUnit.bind(this);
   }
 
   // Nav Bar functionality
@@ -157,6 +158,9 @@ class App extends Component {
   addUnit() {
     // Function to add a new flashCard to our database
     const addUnitURL = `/units/add-unit`
+    const unitName = document.getElementById('unit-name');
+    const unitDescription = document.getElementById('unit-description');
+    const subUnits = document.getElementById('sub-units');
 
     fetch(addUnitURL, {
       method: 'POST',
@@ -164,13 +168,17 @@ class App extends Component {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        unit: document.getElementById('unit-name').value,
-        description: document.getElementById('unit-description').value,
-        sub_units: document.getElementById('sub-units').value,
+        unit: unitName.value,
+        description: unitDescription.value,
+        sub_units: subUnits.value,
       }),
     }).then((response) => response.json())
       .then((newUnitResponse) => {
         console.log('new unit response', newUnitResponse);
+
+        unitName.value = '';
+        unitDescription.value = '';
+        subUnits.value = '';
 
         this.setState({
           units: newUnitResponse,
