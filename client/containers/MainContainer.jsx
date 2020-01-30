@@ -39,7 +39,9 @@ function MainContainer (props) {
             }
           </Route>
           <Route path='/main-container/create-unit'>
-            <NewUnitContainer />
+            <NewUnitContainer
+              addUnit={ props.addUnit }
+            />
           </Route>
         </Switch>
     </div>

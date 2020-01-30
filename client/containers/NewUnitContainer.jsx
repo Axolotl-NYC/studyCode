@@ -5,7 +5,9 @@ class NewUnitContainer extends React.Component {
   render () {
     return (
       <section>
-        <NewUnitModal />
+        <NewUnitModal
+          addUnit={ this.addUnit }
+        />
       </section>
     )
   }
