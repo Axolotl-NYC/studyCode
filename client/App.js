@@ -168,10 +168,13 @@ class App extends Component {
         description: document.getElementById('unit-description').value,
         sub_units: document.getElementById('sub-units').value,
       }),
-    }).then(response => response.json())
+    }).then((response) => response.json())
       .then((newUnitResponse) => {
+        console.log('new unit response', newUnitResponse);
+
         this.setState({
           units: newUnitResponse,
+          postDidMount: true,
         })
       })
       .catch(err => console.log('error in New Unit Response:', err));
