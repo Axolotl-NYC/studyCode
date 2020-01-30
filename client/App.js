@@ -22,7 +22,7 @@ class App extends Component {
       currentFlashCards: null,
       currentResources: null,
       question: true,
-      questionsArray: [],
+      questionsArray: [true],
     }
 
     this.updateCurrentUnit = this.updateCurrentUnit.bind(this);
