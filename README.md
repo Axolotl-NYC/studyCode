@@ -1,2 +1,2 @@
-# CS-study
+# studyCode
 
